@@ -11,6 +11,16 @@ export interface RouteAnalysisRequest {
   priority?: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
 }
 
+export interface PredictiveTimelinePoint {
+  timepoint: 'NOW' | '+2 HOURS' | '+5 HOURS';
+  riskLevel: 'LOW' | 'MODERATE' | 'HIGH' | 'CRITICAL';
+  riskScore: number;
+  statusIcon: string;
+  rainfallForecastMm: number;
+  reason: string;
+  isLive: boolean;
+}
+
 export interface RouteAnalysisResult {
   origin: string;
   destination: string;
@@ -45,6 +55,8 @@ export interface RouteAnalysisResult {
   mlPrediction: MLRiskPrediction;
   aiRecommendation: string;
   analysisTimestamp: string;
+  riskBreakdown?: any[];
+  predictiveTimeline?: PredictiveTimelinePoint[];
 }
 
 // In-memory cache for fast repeat queries during current session
@@ -346,6 +358,65 @@ export async function analyzeRoute(req: RouteAnalysisRequest): Promise<RouteAnal
     aiRecommendation += ` [Weather Alert: ${weatherSummary.meteorologicalAdvisory}]`;
   }
 
+  // 7. Predictive Disruption Timeline (NOW, +2 HOURS, +5 HOURS)
+  const currentRain = weatherSummary ? weatherSummary.maxPrecipitationMm : 12;
+  const currentScore = mlPrediction.riskScore;
+  const isHighElevation = (originLoc.elevationMeters + destLoc.elevationMeters) / 2 > 800;
+
+  const rainDelta2h = isHighElevation ? Math.min(25, Math.round(currentRain * 0.4 + 6)) : Math.round(currentRain * 0.2);
+  const rainForecast2h = Math.round((currentRain + rainDelta2h) * 10) / 10;
+  const score2h = Math.min(98.5, Math.round((currentScore + (rainDelta2h > 5 ? 12 : 4)) * 10) / 10);
+  const level2h: 'LOW' | 'MODERATE' | 'HIGH' | 'CRITICAL' = score2h <= 35 ? 'LOW' : score2h <= 65 ? 'MODERATE' : 'CRITICAL';
+
+  const rainDelta5h = isHighElevation ? Math.min(45, Math.round(rainForecast2h * 0.5 + 8)) : Math.round(rainForecast2h * 0.25);
+  const rainForecast5h = Math.round((rainForecast2h + rainDelta5h) * 10) / 10;
+  const score5h = Math.min(99.0, Math.round((score2h + (rainDelta5h > 8 ? 16 : 6)) * 10) / 10);
+  const level5h: 'LOW' | 'MODERATE' | 'HIGH' | 'CRITICAL' = score5h <= 35 ? 'LOW' : score5h <= 65 ? 'MODERATE' : 'CRITICAL';
+
+  const reasonNow = currentScore <= 35 
+    ? 'Stable meteorological baseline with clear highway transit.' 
+    : currentScore <= 65 
+      ? 'Moderate precipitation and active road surface caution.' 
+      : 'Severe precipitation or active roadblock elevating current risk.';
+
+  const reason2h = score2h > currentScore 
+    ? `Expected increase in rainfall intensity (+${rainDelta2h}mm) combined with vulnerable terrain may increase disruption probability.`
+    : 'Forecast indicates sustained weather stability across corridor.';
+
+  const reason5h = score5h > score2h 
+    ? `Extended meteorological forecast projects cumulative saturation (${rainForecast5h}mm total) elevating landslide and waterlogging susceptibility.`
+    : 'Extended forecast models project stable passage with manageable transit delays.';
+
+  const predictiveTimeline: PredictiveTimelinePoint[] = [
+    {
+      timepoint: 'NOW',
+      riskLevel: mlPrediction.riskLevel,
+      riskScore: currentScore,
+      statusIcon: currentScore <= 35 ? '🟢' : currentScore <= 65 ? '🟡' : '🔴',
+      rainfallForecastMm: currentRain,
+      reason: reasonNow,
+      isLive: true
+    },
+    {
+      timepoint: '+2 HOURS',
+      riskLevel: level2h,
+      riskScore: score2h,
+      statusIcon: score2h <= 35 ? '🟢' : score2h <= 65 ? '🟡' : '🔴',
+      rainfallForecastMm: rainForecast2h,
+      reason: reason2h,
+      isLive: false
+    },
+    {
+      timepoint: '+5 HOURS',
+      riskLevel: level5h,
+      riskScore: score5h,
+      statusIcon: score5h <= 35 ? '🟢' : score5h <= 65 ? '🟡' : '🔴',
+      rainfallForecastMm: rainForecast5h,
+      reason: reason5h,
+      isLive: false
+    }
+  ];
+
   const result: RouteAnalysisResult = {
     origin: `${originLoc.name}, ${originLoc.state}`,
     destination: `${destLoc.name}, ${destLoc.state}`,
@@ -373,7 +444,9 @@ export async function analyzeRoute(req: RouteAnalysisRequest): Promise<RouteAnal
     weatherSummary,
     mlPrediction,
     aiRecommendation,
-    analysisTimestamp: new Date().toISOString()
+    analysisTimestamp: new Date().toISOString(),
+    riskBreakdown: mlPrediction.riskBreakdown,
+    predictiveTimeline
   };
 
   routeCache.set(cacheKey, { result, timestamp: Date.now() });

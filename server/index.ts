@@ -18,6 +18,7 @@ import { weatherRouter } from './routes/weather.js';
 import { mlRouter } from './routes/ml.js';
 import { aiRouter } from './routes/ai.js';
 import { emergencyRouter } from './routes/emergency.js';
+import missionsRouter from './routes/missions.js';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -51,6 +52,7 @@ app.use('/health', healthRouter);
 
 // API Routes Mounting
 app.use('/api/v1/vehicles', vehicleRouter);
+app.use('/api/v1/fleet', vehicleRouter); // Alias for fleet
 app.use('/api/v1/shipments', shipmentRouter);
 app.use('/api/v1/incidents', incidentRouter);
 app.use('/api/v1/alerts', incidentRouter); // Alias for alerts
@@ -63,6 +65,7 @@ app.use('/api/v1/weather', weatherRouter);
 app.use('/api/v1/ml', mlRouter);
 app.use('/api/v1/ai', aiRouter);
 app.use('/api/v1/emergency', emergencyRouter);
+app.use('/api/v1/missions', missionsRouter);
 
 // Reset Database API endpoint
 app.post('/api/v1/reset', (req: Request, res: Response) => {

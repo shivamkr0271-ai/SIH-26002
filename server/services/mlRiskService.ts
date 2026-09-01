@@ -18,6 +18,13 @@ export interface MLRiskInput {
   [key: string]: any;
 }
 
+export interface RiskFactorContribution {
+  factor: string;
+  contribution: number;
+  percentage: number;
+  description: string;
+}
+
 export interface MLRiskPrediction {
   riskScore: number; // 0 to 100
   riskLevel: 'LOW' | 'MODERATE' | 'HIGH' | 'CRITICAL';
@@ -31,6 +38,7 @@ export interface MLRiskPrediction {
   featuresEvaluated: number;
   isPrototype: boolean;
   generatedAt: string;
+  riskBreakdown: RiskFactorContribution[];
 }
 
 const FEATURE_NAMES = [
@@ -201,6 +209,55 @@ class MLRiskService {
       else if (rainfall > 30.0) floodRisk = 'WATCH';
     }
 
+    // Deterministic Explainable Risk Factor Attribution
+    const rawRainContribution = Math.max(2, (rainfall / 60.0) * 35.0 + (rainfallIntensity - 1) * 6.0);
+    const rawLandslideContribution = Math.max(3, (elevation / 1800.0) * 30.0 + terrainGrade * 8.0 + (elevation > 900 && rainfall > 20 ? 12 : 0));
+    const rawIncidentContribution = Math.max(1, activeIncidents * 18.0 + incidentSeverity * 8.0);
+    const rawRoadContribution = Math.max(2, Math.max(0, (10 - roadCondition)) * 2.5 + Math.max(0, (10 - bridgeCondition)) * 1.8);
+    const rawTrafficContribution = Math.max(1, trafficLevel * 4.0 + (routeDuration > 300 ? 5 : 2));
+
+    const totalRaw = rawRainContribution + rawLandslideContribution + rawIncidentContribution + rawRoadContribution + rawTrafficContribution;
+    const factorRatio = finalScore / Math.max(1, totalRaw);
+
+    const cRain = Math.round(rawRainContribution * factorRatio);
+    const cLandslide = Math.round(rawLandslideContribution * factorRatio);
+    const cIncident = Math.round(rawIncidentContribution * factorRatio);
+    const cRoad = Math.round(rawRoadContribution * factorRatio);
+    const cTraffic = Math.max(1, Math.round(finalScore) - (cRain + cLandslide + cIncident + cRoad));
+
+    const riskBreakdown: RiskFactorContribution[] = [
+      {
+        factor: 'Heavy Rainfall & Precipitation',
+        contribution: cRain,
+        percentage: Math.round((cRain / finalScore) * 100),
+        description: `${rainfall} mm precipitation (${rainfall > 25 ? 'High Intensity' : 'Moderate'}) across transit sector`
+      },
+      {
+        factor: 'Landslide Zone & Slope Gradient',
+        contribution: cLandslide,
+        percentage: Math.round((cLandslide / finalScore) * 100),
+        description: `${elevation}m elevation ghat terrain with ${terrainGrade > 1 ? 'steep slope gradient' : 'moderate grade'}`
+      },
+      {
+        factor: 'Active Roadblocks & Incidents',
+        contribution: cIncident,
+        percentage: Math.round((cIncident / finalScore) * 100),
+        description: activeIncidents > 0 ? `${activeIncidents} active bottleneck/incident(s) reported along corridor` : 'Clear corridor with historical disruption weighting'
+      },
+      {
+        factor: 'Road & Infrastructure Condition',
+        contribution: cRoad,
+        percentage: Math.round((cRoad / finalScore) * 100),
+        description: `Surface rating: ${roadCondition}/10 | Bridge structural integrity: ${bridgeCondition}/10`
+      },
+      {
+        factor: 'Traffic & Sector Congestion',
+        contribution: cTraffic,
+        percentage: Math.max(1, Math.round((cTraffic / finalScore) * 100)),
+        description: `Transit duration friction (${Math.round(routeDuration)}m transit baseline)`
+      }
+    ];
+
     const confidence = this.modelData.metrics?.accuracy_percent
       ? Number(this.modelData.metrics.accuracy_percent)
       : 94.2;
@@ -217,7 +274,8 @@ class MLRiskService {
       modelVersion: this.modelData.version || '1.4.0-prototype',
       featuresEvaluated: featureValues.length,
       isPrototype: true,
-      generatedAt: new Date().toISOString()
+      generatedAt: new Date().toISOString(),
+      riskBreakdown
     };
   }
 

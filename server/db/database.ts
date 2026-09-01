@@ -90,11 +90,36 @@ export interface Notification {
   type: 'info' | 'warning' | 'critical' | 'success';
 }
 
+export interface Mission {
+  id: string;
+  commodity: string;
+  origin: string;
+  destination: string;
+  cargoWeightTon: number;
+  priority: 'LOW' | 'NORMAL' | 'HIGH' | 'CRITICAL';
+  vehicleId?: string;
+  vehicleStatus?: string;
+  recommendedRouteId: string;
+  recommendedRouteName: string;
+  alternateRouteName?: string;
+  riskScore: number;
+  riskLevel: 'LOW' | 'MODERATE' | 'HIGH' | 'CRITICAL';
+  weatherStatus: string;
+  eta: string;
+  estimatedDelayMinutes: number;
+  fuelEstimateLitres: number;
+  criticalCheckpoints: string[];
+  justification: string;
+  status: 'OPTIMIZED' | 'IN_TRANSIT' | 'COMPLETED' | 'HALTED';
+  createdAt: string;
+}
+
 export interface DatabaseSchema {
   states: State[];
   incidents: Incident[];
   vehicles: Vehicle[];
   shipments: Shipment[];
+  missions: Mission[];
   fieldReports: FieldReport[];
   activities: Activity[];
   notifications: Notification[];
@@ -335,6 +360,55 @@ const initialReports: FieldReport[] = [
   }
 ];
 
+const initialMissions: Mission[] = [
+  {
+    id: 'MSN-901',
+    commodity: 'Medical Supplies',
+    origin: 'Guwahati, Assam',
+    destination: 'Imphal, Manipur',
+    cargoWeightTon: 2.5,
+    priority: 'CRITICAL',
+    vehicleId: 'AS-01-EC-9901',
+    vehicleStatus: 'IN TRANSIT',
+    recommendedRouteId: 'ALT-CORRIDOR-01',
+    recommendedRouteName: 'Bypass Corridor via NH-27 / NH-06 Alternate',
+    alternateRouteName: 'Primary Highway via NH-29',
+    riskScore: 28.5,
+    riskLevel: 'LOW',
+    weatherStatus: 'Moderate Rain (12mm)',
+    eta: '7h 20m',
+    estimatedDelayMinutes: 25,
+    fuelEstimateLitres: 142,
+    criticalCheckpoints: ['Guwahati Hub', 'Jorabat Junction', 'Lumding Pass', 'Imphal Transit Point'],
+    justification: 'Diverted from primary corridor to avoid active landslide warning at Mao Gate. Alternate corridor provides stable passage.',
+    status: 'IN_TRANSIT',
+    createdAt: new Date(Date.now() - 1000 * 60 * 120).toISOString()
+  },
+  {
+    id: 'MSN-902',
+    commodity: 'Emergency Food & Rations',
+    origin: 'Guwahati, Assam',
+    destination: 'Aizawl, Mizoram',
+    cargoWeightTon: 5.0,
+    priority: 'HIGH',
+    vehicleId: 'MZ-01-FD-3310',
+    vehicleStatus: 'IN TRANSIT',
+    recommendedRouteId: 'PRIMARY',
+    recommendedRouteName: 'Primary Corridor via NH-06 / NH-306',
+    alternateRouteName: 'Silchar Hill Bypass',
+    riskScore: 68.2,
+    riskLevel: 'CRITICAL',
+    weatherStatus: 'Heavy Rain (38mm), High Landslide Risk',
+    eta: '8h 45m',
+    estimatedDelayMinutes: 140,
+    fuelEstimateLitres: 215,
+    criticalCheckpoints: ['Guwahati Hub', 'Meghalaya Plateau Gate', 'Silchar Transit Hub', 'Aizawl Civil Supply Depot'],
+    justification: 'High-clearance 4WD convoy assigned. Escort recommended through Sonapur tunnel segment due to mud runoff.',
+    status: 'IN_TRANSIT',
+    createdAt: new Date(Date.now() - 1000 * 60 * 240).toISOString()
+  }
+];
+
 class Database {
   private data: DatabaseSchema;
 
@@ -353,7 +427,9 @@ class Database {
     try {
       if (fs.existsSync(DB_FILE)) {
         const fileContent = fs.readFileSync(DB_FILE, 'utf-8');
-        return JSON.parse(fileContent);
+        const parsed = JSON.parse(fileContent);
+        if (!parsed.missions) parsed.missions = initialMissions;
+        return parsed;
       }
     } catch (err) {
       console.error('[DB] Error loading database file, reinitializing default dataset:', err);
@@ -365,6 +441,7 @@ class Database {
       incidents: initialIncidents,
       vehicles: initialVehicles,
       shipments: initialShipments,
+      missions: initialMissions,
       fieldReports: initialReports,
       activities: [
         {
@@ -536,6 +613,50 @@ class Database {
     return false;
   }
 
+  // Missions CRUD
+  public getMissions(): Mission[] {
+    return this.data.missions || [];
+  }
+
+  public getMissionById(id: string): Mission | undefined {
+    return (this.data.missions || []).find(m => m.id === id);
+  }
+
+  public addMission(mission: Mission): Mission {
+    if (!this.data.missions) this.data.missions = [];
+    const existingIndex = this.data.missions.findIndex(m => m.id === mission.id);
+    if (existingIndex >= 0) {
+      this.data.missions[existingIndex] = mission;
+    } else {
+      this.data.missions.unshift(mission);
+    }
+    this.addActivity(`Mission ${mission.id} created: ${mission.commodity} (${mission.origin} → ${mission.destination})`, 'mission', mission.id);
+    this.save();
+    return mission;
+  }
+
+  public updateMission(id: string, updates: Partial<Mission>): Mission | null {
+    if (!this.data.missions) this.data.missions = [];
+    const index = this.data.missions.findIndex(m => m.id === id);
+    if (index === -1) return null;
+    this.data.missions[index] = { ...this.data.missions[index], ...updates };
+    this.addActivity(`Mission ${id} updated (${updates.status || 'Updated'})`, 'mission', id);
+    this.save();
+    return this.data.missions[index];
+  }
+
+  public deleteMission(id: string): boolean {
+    if (!this.data.missions) return false;
+    const initialLen = this.data.missions.length;
+    this.data.missions = this.data.missions.filter(m => m.id !== id);
+    if (this.data.missions.length < initialLen) {
+      this.addActivity(`Mission ${id} removed`, 'mission', id);
+      this.save();
+      return true;
+    }
+    return false;
+  }
+
   // Field Reports CRUD
   public getFieldReports(): FieldReport[] {
     return this.data.fieldReports;
@@ -680,6 +801,7 @@ class Database {
       incidents: initialIncidents,
       vehicles: initialVehicles,
       shipments: initialShipments,
+      missions: initialMissions,
       fieldReports: initialReports,
       activities: [{ id: 'act-01', action: 'Database reset to default seed data', time: new Date().toISOString(), type: 'system' }],
       notifications: [{ id: 'notif-01', title: 'Data Reset', message: 'Original demo dataset restored', time: new Date().toISOString(), read: false, type: 'info' }],

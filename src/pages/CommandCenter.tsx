@@ -3,7 +3,7 @@ import {
   MapPin, AlertTriangle, Truck, Activity, Box, Map as MapIcon, 
   CheckCircle2, Navigation, Layers, ShieldAlert, Sparkles, 
   Flame, Radio, RefreshCw, Send, ChevronRight, ShieldCheck,
-  AlertOctagon, Info, Crosshair, ArrowRight
+  AlertOctagon, Info, Crosshair, ArrowRight, Zap
 } from 'lucide-react';
 import { Card, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
@@ -207,6 +207,13 @@ export default function CommandCenter() {
             className="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(8,145,178,0.4)] cursor-pointer"
           >
             <Navigation className="w-3.5 h-3.5" /> Analyze Custom Route
+          </button>
+
+          <button 
+            onClick={() => navigate('/supply')} 
+            className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.4)] cursor-pointer"
+          >
+            <Zap className="w-3.5 h-3.5" /> Create Mission
           </button>
         </div>
       </div>
@@ -692,6 +699,82 @@ export default function CommandCenter() {
           </Card>
         </div>
       </div>
+
+      {/* Analyze Custom Route Modal */}
+      {routeModalOpen && (
+        <div className="fixed inset-0 z-[1000] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-[#0c1017] border border-gray-200 dark:border-white/10 rounded-2xl p-6 max-w-md w-full shadow-2xl space-y-4 animate-in fade-in zoom-in duration-150">
+            <div className="flex items-center justify-between border-b border-gray-200 dark:border-white/10 pb-3">
+              <div className="flex items-center gap-2">
+                <Navigation className="w-4 h-4 text-cyan-500" />
+                <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider">
+                  Analyze Custom Route
+                </h3>
+              </div>
+              <button 
+                type="button"
+                onClick={() => setRouteModalOpen(false)}
+                className="text-gray-400 hover:text-white text-sm p-1 rounded-lg hover:bg-white/5 cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              Select origin and destination hubs in the North Eastern Region to perform GIS corridor intelligence analysis.
+            </p>
+
+            <div className="space-y-3">
+              <div>
+                <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">Origin Hub</label>
+                <select 
+                  value={modalOrigin} 
+                  onChange={e => setModalOrigin(e.target.value)}
+                  className="w-full bg-gray-50 dark:bg-[#05070a] border border-gray-300 dark:border-white/10 rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500"
+                >
+                  {NER_LOCATIONS.map(loc => (
+                    <option key={loc.id} value={loc.name}>{loc.name} ({loc.district}, {loc.state})</option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">Destination Hub</label>
+                <select 
+                  value={modalDestination} 
+                  onChange={e => setModalDestination(e.target.value)}
+                  className="w-full bg-gray-50 dark:bg-[#05070a] border border-gray-300 dark:border-white/10 rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500"
+                >
+                  {NER_LOCATIONS.map(loc => (
+                    <option key={loc.id} value={loc.name}>{loc.name} ({loc.district}, {loc.state})</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-end gap-2 pt-3 border-t border-gray-200 dark:border-white/10">
+              <button
+                type="button"
+                onClick={() => setRouteModalOpen(false)}
+                className="px-4 py-2 rounded-lg text-xs font-semibold text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/5 cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setRouteModalOpen(false);
+                  handleLaunchRoute(modalOrigin, modalDestination);
+                }}
+                disabled={modalOrigin === modalDestination}
+                className="px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider bg-cyan-600 hover:bg-cyan-500 text-white flex items-center gap-1.5 shadow-[0_0_15px_rgba(8,145,178,0.4)] disabled:opacity-50 cursor-pointer"
+              >
+                Launch Intelligence <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

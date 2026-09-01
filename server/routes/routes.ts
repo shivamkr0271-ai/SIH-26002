@@ -20,26 +20,29 @@ routeRouter.get('/locations', (req: Request, res: Response) => {
 // POST calculate / analyze route
 async function handleRouteAnalysis(req: Request, res: Response) {
   try {
-    const { origin, destination, cargoType, vehicleType, priority } = req.body;
+    const { origin, destination, cargoType, vehicleType, priority } = req.body || {};
 
     if (!origin || !destination) {
       return res.status(400).json({
         success: false,
-        error: 'Both "origin" and "destination" locations are required.'
+        error: 'Both "origin" and "destination" locations are required.',
+        code: 'MISSING_REQUIRED_LOCATIONS'
       });
     }
 
     if (typeof origin !== 'string' || typeof destination !== 'string') {
       return res.status(400).json({
         success: false,
-        error: '"origin" and "destination" must be valid location strings.'
+        error: '"origin" and "destination" must be valid location strings.',
+        code: 'INVALID_LOCATION_TYPE'
       });
     }
 
     if (origin.trim().toLowerCase() === destination.trim().toLowerCase()) {
       return res.status(400).json({
         success: false,
-        error: 'Origin and Destination cannot be the same location. Please select different points.'
+        error: 'Origin and Destination cannot be the same location. Please select different points.',
+        code: 'SAME_ORIGIN_DESTINATION'
       });
     }
 
@@ -56,11 +59,22 @@ async function handleRouteAnalysis(req: Request, res: Response) {
       data: result
     });
   } catch (err: any) {
-    const isValidationError = err.message.includes('not a recognized NER hub') || err.message.includes('cannot be the same');
+    const msg = err.message || 'Route analysis failed';
+    const isUnrecognized = msg.includes('not a recognized NER hub');
+    const isSame = msg.includes('cannot be the same');
+    const isValidationError = isUnrecognized || isSame;
+    
     const statusCode = isValidationError ? 400 : 500;
+    const errorCode = isUnrecognized 
+      ? 'LOCATION_NOT_FOUND' 
+      : isSame 
+        ? 'SAME_ORIGIN_DESTINATION' 
+        : 'ROUTING_SERVICE_ERROR';
+
     res.status(statusCode).json({
       success: false,
-      error: err.message || 'Route analysis failed'
+      error: msg,
+      code: errorCode
     });
   }
 }

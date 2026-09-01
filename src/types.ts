@@ -117,6 +117,47 @@ export interface MLRiskPrediction {
   generatedAt: string;
 }
 
+export interface RiskFactorContribution {
+  factor: string;
+  contribution: number;
+  percentage: number;
+  description: string;
+}
+
+export interface PredictiveTimelinePoint {
+  timepoint: 'NOW' | '+2 HOURS' | '+5 HOURS';
+  riskLevel: 'LOW' | 'MODERATE' | 'HIGH' | 'CRITICAL';
+  riskScore: number;
+  statusIcon: string;
+  rainfallForecastMm: number;
+  reason: string;
+  isLive: boolean;
+}
+
+export interface Mission {
+  id: string;
+  commodity: string;
+  origin: string;
+  destination: string;
+  cargoWeightTon: number;
+  priority: 'LOW' | 'NORMAL' | 'HIGH' | 'CRITICAL';
+  vehicleId?: string;
+  vehicleStatus?: string;
+  recommendedRouteId: string;
+  recommendedRouteName: string;
+  alternateRouteName?: string;
+  riskScore: number;
+  riskLevel: 'LOW' | 'MODERATE' | 'HIGH' | 'CRITICAL';
+  weatherStatus: string;
+  eta: string;
+  estimatedDelayMinutes: number;
+  fuelEstimateLitres: number;
+  criticalCheckpoints: string[];
+  justification: string;
+  status: 'OPTIMIZED' | 'IN_TRANSIT' | 'COMPLETED' | 'HALTED';
+  createdAt: string;
+}
+
 export interface RouteAnalysisResult {
   origin: string;
   destination: string;
@@ -167,4 +208,6 @@ export interface RouteAnalysisResult {
   mlPrediction?: MLRiskPrediction;
   aiRecommendation: string;
   analysisTimestamp: string;
+  riskBreakdown?: RiskFactorContribution[];
+  predictiveTimeline?: PredictiveTimelinePoint[];
 }

@@ -229,17 +229,18 @@ export async function getAllNerWeather(): Promise<WeatherData[]> {
 }
 
 export async function getRouteWeatherSummary(origin: string, dest: string, routePath?: [number, number][]): Promise<RouteWeatherSummary> {
-  const originWeather = await getLocationWeather(origin);
-  const destWeather = await getLocationWeather(dest);
+  const originLoc = findLocation(origin) || NER_LOCATIONS[0];
+  const destLoc = findLocation(dest) || NER_LOCATIONS[1];
+  
+  const midPoint = (routePath && routePath.length > 2) ? routePath[Math.floor(routePath.length / 2)] : null;
+  const midQuery = midPoint ? { lat: midPoint[0], lng: midPoint[1] } : 'Shillong';
 
-  let midLocationName = 'Shillong';
-  if (routePath && routePath.length > 2) {
-    const midPoint = routePath[Math.floor(routePath.length / 2)];
-    const midWeather = await getLocationWeather({ lat: midPoint[0], lng: midPoint[1] });
-    return buildSummary(originWeather, destWeather, midWeather);
-  }
+  const [originWeather, destWeather, midpointWeather] = await Promise.all([
+    getLocationWeather(origin).catch(() => generateFallbackWeather(originLoc)),
+    getLocationWeather(dest).catch(() => generateFallbackWeather(destLoc)),
+    getLocationWeather(midQuery).catch(() => generateFallbackWeather(NER_LOCATIONS[2] || originLoc))
+  ]);
 
-  const midpointWeather = await getLocationWeather(midLocationName);
   return buildSummary(originWeather, destWeather, midpointWeather);
 }
 

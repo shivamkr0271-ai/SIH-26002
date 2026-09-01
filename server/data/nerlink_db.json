@@ -75,6 +75,86 @@
   ],
   "incidents": [
     {
+      "id": "INC-MSN-837",
+      "title": "Mission Corridor Caution: Construction Materials (MSN-2026-969)",
+      "type": "Traffic",
+      "severity": "WARNING",
+      "status": "ACTIVE",
+      "location": [
+        27.3389,
+        88.6065
+      ],
+      "locationName": "Gangtok to Siliguri Transit Sector",
+      "affectedRoute": "Primary NH Corridor (NH-10)",
+      "predictedImpact": "High priority mission MSN-2026-969 traversing corridor with elevated risk (64.7/100). Escort and real-time GPS monitoring advised.",
+      "recommendedAction": "Maintain contact with convoy driver; monitor radar weather updates.",
+      "timestamp": "2026-09-01T15:22:08.253Z"
+    },
+    {
+      "id": "INC-9819",
+      "title": "Landslide: Sonapur Ghat Sector",
+      "type": "Landslide",
+      "severity": "CRITICAL",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Sonapur Ghat Sector",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Major boulder slide obstructing left carriageway. Heavy traffic slowing down.",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-09-01T15:16:49.665Z"
+    },
+    {
+      "id": "INC-3685",
+      "title": "Landslide: Jorhat Bypass Highway",
+      "type": "Landslide",
+      "severity": "WARNING",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Jorhat Bypass Highway",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Minor gravel movement on shoulder lane",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-09-01T14:48:33.692Z"
+    },
+    {
+      "id": "INC-6102",
+      "title": "Landslide: Jorhat North Sector",
+      "type": "Landslide",
+      "severity": "CRITICAL",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Jorhat North Sector",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Massive landslide blocking both transit lanes near railway crossing",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-09-01T14:48:08.923Z"
+    },
+    {
+      "id": "INC-1557",
+      "title": "Landslide: Sonapur Ghat Sector",
+      "type": "Landslide",
+      "severity": "CRITICAL",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Sonapur Ghat Sector",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Major boulder slide obstructing left carriageway. Heavy traffic slowing down.",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-09-01T14:48:06.915Z"
+    },
+    {
       "id": "INC-4066",
       "title": "Landslide: Jorhat Bypass Highway",
       "type": "Landslide",
@@ -543,10 +623,10 @@
     },
     {
       "id": "NER-MED-204",
-      "cargo": "Essential Medicines",
+      "cargo": "Medical Supplies",
       "cargoType": "MEDICINES",
       "origin": "Guwahati",
-      "destination": "Aizawl",
+      "destination": "Imphal",
       "driver": "Rahul Das",
       "currentLocation": [
         24.3,
@@ -577,10 +657,10 @@
     },
     {
       "id": "NER-CON-342",
-      "cargo": "Cement & Steel",
+      "cargo": "Construction Materials",
       "cargoType": "CONSTRUCTION MATERIAL",
-      "origin": "Guwahati",
-      "destination": "Itanagar",
+      "origin": "Gangtok",
+      "destination": "Siliguri",
       "driver": "Karma Bhutia",
       "currentLocation": [
         26.8,
@@ -589,7 +669,7 @@
       "speed": 55,
       "eta": "2026-08-28T20:52:41.141Z",
       "status": "IN TRANSIT",
-      "risk": "LOW",
+      "risk": "HIGH",
       "progress": 75
     },
     {
@@ -678,6 +758,36 @@
     }
   ],
   "fieldReports": [
+    {
+      "id": "FR-9819",
+      "incidentType": "Landslide",
+      "locationName": "Sonapur Ghat Sector",
+      "description": "Major boulder slide obstructing left carriageway. Heavy traffic slowing down.",
+      "severity": "CRITICAL",
+      "officerName": "Inspector Sarma",
+      "status": "SYNCED",
+      "timestamp": "2026-09-01T15:16:49.665Z"
+    },
+    {
+      "id": "FR-6102",
+      "incidentType": "Landslide",
+      "locationName": "Jorhat North Sector",
+      "description": "Massive landslide blocking both transit lanes near railway crossing",
+      "severity": "CRITICAL",
+      "officerName": "Captain Hazarika",
+      "status": "SYNCED",
+      "timestamp": "2026-09-01T14:48:08.923Z"
+    },
+    {
+      "id": "FR-1557",
+      "incidentType": "Landslide",
+      "locationName": "Sonapur Ghat Sector",
+      "description": "Major boulder slide obstructing left carriageway. Heavy traffic slowing down.",
+      "severity": "CRITICAL",
+      "officerName": "Inspector Sarma",
+      "status": "SYNCED",
+      "timestamp": "2026-09-01T14:48:06.915Z"
+    },
     {
       "id": "FR-1804",
       "incidentType": "Landslide",
@@ -837,6 +947,167 @@
     }
   ],
   "activities": [
+    {
+      "id": "act-0n1km7m",
+      "action": "Incident alert INC-MSN-837 declared: Mission Corridor Caution: Construction Materials (MSN-2026-969)",
+      "time": "2026-09-01T15:22:08.254Z",
+      "type": "incident",
+      "relatedId": "INC-MSN-837"
+    },
+    {
+      "id": "act-hxm36uu",
+      "action": "Mission MSN-2026-969 created: Construction Materials (Gangtok, Sikkim → Siliguri, West Bengal)",
+      "time": "2026-09-01T15:22:08.241Z",
+      "type": "mission",
+      "relatedId": "MSN-2026-969"
+    },
+    {
+      "id": "act-x8p6eya",
+      "action": "Vehicle NER-CON-342 status updated (IN TRANSIT)",
+      "time": "2026-09-01T15:22:08.227Z",
+      "type": "vehicle",
+      "relatedId": "NER-CON-342"
+    },
+    {
+      "id": "act-bq8pl7q",
+      "action": "Mission MSN-2026-618 created: Medical Supplies (Guwahati, Assam → Imphal, Manipur)",
+      "time": "2026-09-01T15:18:20.888Z",
+      "type": "mission",
+      "relatedId": "MSN-2026-618"
+    },
+    {
+      "id": "act-6inrvls",
+      "action": "Vehicle NER-MED-204 status updated (IN TRANSIT)",
+      "time": "2026-09-01T15:18:20.877Z",
+      "type": "vehicle",
+      "relatedId": "NER-MED-204"
+    },
+    {
+      "id": "act-6700ols",
+      "action": "Incident alert INC-9819 declared: Landslide: Sonapur Ghat Sector",
+      "time": "2026-09-01T15:16:49.666Z",
+      "type": "incident",
+      "relatedId": "INC-9819"
+    },
+    {
+      "id": "act-93ysmef",
+      "action": "Field report FR-9819 submitted by Inspector Sarma",
+      "time": "2026-09-01T15:16:49.666Z",
+      "type": "report",
+      "relatedId": "FR-9819"
+    },
+    {
+      "id": "act-n7tj9t1",
+      "action": "Vehicle NER-DEMO-99 registered",
+      "time": "2026-09-01T15:16:49.645Z",
+      "type": "vehicle",
+      "relatedId": "NER-DEMO-99"
+    },
+    {
+      "id": "act-5klhjf5",
+      "action": "Mission MSN-2026-229 created: Medical Supplies (Guwahati, Assam → Imphal, Manipur)",
+      "time": "2026-09-01T15:15:55.805Z",
+      "type": "mission",
+      "relatedId": "MSN-2026-229"
+    },
+    {
+      "id": "act-ldrau1v",
+      "action": "Vehicle NER-MED-204 status updated (IN TRANSIT)",
+      "time": "2026-09-01T15:15:55.798Z",
+      "type": "vehicle",
+      "relatedId": "NER-MED-204"
+    },
+    {
+      "id": "act-7e683sh",
+      "action": "Mission MSN-2026-906 created: Medical Supplies (Guwahati, Assam → Imphal, Manipur)",
+      "time": "2026-09-01T15:14:54.206Z",
+      "type": "mission",
+      "relatedId": "MSN-2026-906"
+    },
+    {
+      "id": "act-3e7rfz2",
+      "action": "Mission MSN-2026-168 created: Medical Supplies (Guwahati, Assam → Imphal, Manipur)",
+      "time": "2026-09-01T15:12:59.822Z",
+      "type": "mission",
+      "relatedId": "MSN-2026-168"
+    },
+    {
+      "id": "act-b1qslzm",
+      "action": "Mission MSN-2026-434 created: Medical Supplies (Guwahati, Assam → Imphal, Manipur)",
+      "time": "2026-09-01T15:04:35.861Z",
+      "type": "mission",
+      "relatedId": "MSN-2026-434"
+    },
+    {
+      "id": "act-lzubvnx",
+      "action": "Field report FR-TEST-1788274113685 deleted",
+      "time": "2026-09-01T14:48:33.726Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1788274113685"
+    },
+    {
+      "id": "act-kz3r3hd",
+      "action": "Incident alert INC-3685 declared: Landslide: Jorhat Bypass Highway",
+      "time": "2026-09-01T14:48:33.693Z",
+      "type": "incident",
+      "relatedId": "INC-3685"
+    },
+    {
+      "id": "act-2qrzdo7",
+      "action": "Field report FR-TEST-1788274113685 submitted by Patrol unit 4",
+      "time": "2026-09-01T14:48:33.692Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1788274113685"
+    },
+    {
+      "id": "act-7fevqm3",
+      "action": "Vehicle TEST-VEH-1788274113649 decommissioned",
+      "time": "2026-09-01T14:48:33.677Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1788274113649"
+    },
+    {
+      "id": "act-vgwagok",
+      "action": "Vehicle TEST-VEH-1788274113649 registered",
+      "time": "2026-09-01T14:48:33.658Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1788274113649"
+    },
+    {
+      "id": "act-2cgxhjg",
+      "action": "Incident alert INC-6102 declared: Landslide: Jorhat North Sector",
+      "time": "2026-09-01T14:48:08.923Z",
+      "type": "incident",
+      "relatedId": "INC-6102"
+    },
+    {
+      "id": "act-kp7rg8c",
+      "action": "Field report FR-6102 submitted by Captain Hazarika",
+      "time": "2026-09-01T14:48:08.923Z",
+      "type": "report",
+      "relatedId": "FR-6102"
+    },
+    {
+      "id": "act-q0l460a",
+      "action": "Incident alert INC-1557 declared: Landslide: Sonapur Ghat Sector",
+      "time": "2026-09-01T14:48:06.916Z",
+      "type": "incident",
+      "relatedId": "INC-1557"
+    },
+    {
+      "id": "act-4aasxfs",
+      "action": "Field report FR-1557 submitted by Inspector Sarma",
+      "time": "2026-09-01T14:48:06.916Z",
+      "type": "report",
+      "relatedId": "FR-1557"
+    },
+    {
+      "id": "act-z6fhk2n",
+      "action": "Vehicle NER-DEMO-99 registered",
+      "time": "2026-09-01T14:48:06.895Z",
+      "type": "vehicle",
+      "relatedId": "NER-DEMO-99"
+    },
     {
       "id": "act-ofba5a6",
       "action": "Field report FR-TEST-1787953964066 deleted",
@@ -1375,147 +1646,33 @@
       "time": "2026-08-28T17:51:41.902Z",
       "type": "vehicle",
       "relatedId": "TEST-VEH-1787939501890"
-    },
-    {
-      "id": "act-zkve2ji",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:20.068Z",
-      "type": "route"
-    },
-    {
-      "id": "act-3lq06ul",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:19.545Z",
-      "type": "route"
-    },
-    {
-      "id": "act-v92y93y",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:17.908Z",
-      "type": "route"
-    },
-    {
-      "id": "act-fuyxrrl",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:17.857Z",
-      "type": "route"
-    },
-    {
-      "id": "act-vseo2i8",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:16.288Z",
-      "type": "route"
-    },
-    {
-      "id": "act-1058ssd",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:16.245Z",
-      "type": "route"
-    },
-    {
-      "id": "act-qh4pg9f",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:14.530Z",
-      "type": "route"
-    },
-    {
-      "id": "act-809fcxb",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:14.467Z",
-      "type": "route"
-    },
-    {
-      "id": "act-m2fbr33",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:12.826Z",
-      "type": "route"
-    },
-    {
-      "id": "act-hou8t6b",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:12.801Z",
-      "type": "route"
-    },
-    {
-      "id": "act-cvg7k71",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:11.312Z",
-      "type": "route"
-    },
-    {
-      "id": "act-6xn2mvx",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:11.247Z",
-      "type": "route"
-    },
-    {
-      "id": "act-mmtitze",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:09.631Z",
-      "type": "route"
-    },
-    {
-      "id": "act-95isdoz",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:09.565Z",
-      "type": "route"
-    },
-    {
-      "id": "act-1vozei5",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:07.759Z",
-      "type": "route"
-    },
-    {
-      "id": "act-tm63dug",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:07.715Z",
-      "type": "route"
-    },
-    {
-      "id": "act-xhuft3t",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:05.975Z",
-      "type": "route"
-    },
-    {
-      "id": "act-2cw6fzb",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:05.963Z",
-      "type": "route"
-    },
-    {
-      "id": "act-t3579va",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:04.432Z",
-      "type": "route"
-    },
-    {
-      "id": "act-cl0il97",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:04.420Z",
-      "type": "route"
-    },
-    {
-      "id": "act-fgec0ib",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:02.858Z",
-      "type": "route"
-    },
-    {
-      "id": "act-g8wewpx",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:02.826Z",
-      "type": "route"
-    },
-    {
-      "id": "act-dtf7o1l",
-      "action": "Route analysis: Guwahati → Aizawl (474 km)",
-      "time": "2026-08-28T17:47:01.118Z",
-      "type": "route"
     }
   ],
   "notifications": [
+    {
+      "id": "notif-c0ei3md",
+      "title": "CRITICAL DISRUPTION",
+      "message": "Landslide: Sonapur Ghat Sector at Sonapur Ghat Sector",
+      "time": "2026-09-01T15:16:49.666Z",
+      "read": false,
+      "type": "critical"
+    },
+    {
+      "id": "notif-oou6vi4",
+      "title": "CRITICAL DISRUPTION",
+      "message": "Landslide: Jorhat North Sector at Jorhat North Sector",
+      "time": "2026-09-01T14:48:08.923Z",
+      "read": false,
+      "type": "critical"
+    },
+    {
+      "id": "notif-qxx4kuv",
+      "title": "CRITICAL DISRUPTION",
+      "message": "Landslide: Sonapur Ghat Sector at Sonapur Ghat Sector",
+      "time": "2026-09-01T14:48:06.916Z",
+      "read": false,
+      "type": "critical"
+    },
     {
       "id": "notif-vi7eb6q",
       "title": "CRITICAL DISRUPTION",
@@ -1891,35 +2048,236 @@
       "time": "2026-08-28T17:46:50.981Z",
       "read": false,
       "type": "success"
-    },
-    {
-      "id": "notif-g3bjybt",
-      "title": "Route Analyzed",
-      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
-      "time": "2026-08-28T17:46:49.102Z",
-      "read": false,
-      "type": "success"
-    },
-    {
-      "id": "notif-869r2a4",
-      "title": "Route Analyzed",
-      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
-      "time": "2026-08-28T17:46:48.977Z",
-      "read": false,
-      "type": "success"
-    },
-    {
-      "id": "notif-g8vb1nx",
-      "title": "Route Analyzed",
-      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
-      "time": "2026-08-28T17:46:47.215Z",
-      "read": false,
-      "type": "success"
     }
   ],
   "meta": {
     "version": "2.4.0",
-    "lastUpdated": "2026-08-28T21:52:44.110Z",
+    "lastUpdated": "2026-09-01T15:22:08.254Z",
     "isEmergency": false
-  }
+  },
+  "missions": [
+    {
+      "id": "MSN-2026-969",
+      "commodity": "Construction Materials",
+      "origin": "Gangtok, Sikkim",
+      "destination": "Siliguri, West Bengal",
+      "cargoWeightTon": 7,
+      "priority": "HIGH",
+      "vehicleId": "NER-CON-342",
+      "vehicleStatus": "IN TRANSIT",
+      "recommendedRouteId": "PRIMARY-01",
+      "recommendedRouteName": "Primary NH Corridor (NH-10)",
+      "alternateRouteName": "Bypass Corridor via NH-10 Alternate",
+      "riskScore": 64.7,
+      "riskLevel": "HIGH",
+      "weatherStatus": "MODERATE Risk (0.5mm rain) — WEATHER CAUTION: Light to moderate precipitation. Road surfaces may be slick in mountain ghat sections.",
+      "eta": "1h 28m",
+      "estimatedDelayMinutes": 136,
+      "fuelEstimateLitres": 65,
+      "criticalCheckpoints": [
+        "Gangtok Dispatch Point",
+        "NH-10 Checkpoint",
+        "NH-10 Junction",
+        "Siliguri Receiving Terminal"
+      ],
+      "justification": "Primary route provides lowest combined disruption risk (64.7/100) with optimized transit time (1h 28m).",
+      "status": "OPTIMIZED",
+      "createdAt": "2026-09-01T15:22:08.241Z"
+    },
+    {
+      "id": "MSN-2026-618",
+      "commodity": "Medical Supplies",
+      "origin": "Guwahati, Assam",
+      "destination": "Imphal, Manipur",
+      "cargoWeightTon": 2.5,
+      "priority": "CRITICAL",
+      "vehicleId": "NER-MED-204",
+      "vehicleStatus": "IN TRANSIT",
+      "recommendedRouteId": "PRIMARY-01",
+      "recommendedRouteName": "Primary NH Corridor (NH-27)",
+      "alternateRouteName": "Bypass Corridor via NH-27 Alternate",
+      "riskScore": 50.7,
+      "riskLevel": "MODERATE",
+      "weatherStatus": "LOW Risk (0.3mm rain) — Meteorological conditions along corridor are favorable. Average visibility 10.7 km with minimal precipitation.",
+      "eta": "5h 54m",
+      "estimatedDelayMinutes": 62,
+      "fuelEstimateLitres": 179,
+      "criticalCheckpoints": [
+        "Guwahati Dispatch Point",
+        "NH-27 Checkpoint",
+        "NH-29 Junction",
+        "Imphal Receiving Terminal"
+      ],
+      "justification": "Primary route provides lowest combined disruption risk (50.7/100) with optimized transit time (5h 54m).",
+      "status": "OPTIMIZED",
+      "createdAt": "2026-09-01T15:18:20.888Z"
+    },
+    {
+      "id": "MSN-2026-229",
+      "commodity": "Medical Supplies",
+      "origin": "Guwahati, Assam",
+      "destination": "Imphal, Manipur",
+      "cargoWeightTon": 2.5,
+      "priority": "CRITICAL",
+      "vehicleId": "NER-MED-204",
+      "vehicleStatus": "IN TRANSIT",
+      "recommendedRouteId": "PRIMARY-01",
+      "recommendedRouteName": "Primary NH Corridor (NH-27)",
+      "alternateRouteName": "Bypass Corridor via NH-27 Alternate",
+      "riskScore": 50.7,
+      "riskLevel": "MODERATE",
+      "weatherStatus": "LOW Risk (0.3mm rain) — Meteorological conditions along corridor are favorable. Average visibility 10.7 km with minimal precipitation.",
+      "eta": "5h 54m",
+      "estimatedDelayMinutes": 62,
+      "fuelEstimateLitres": 179,
+      "criticalCheckpoints": [
+        "Guwahati Dispatch Point",
+        "NH-27 Checkpoint",
+        "NH-29 Junction",
+        "Imphal Receiving Terminal"
+      ],
+      "justification": "Primary route provides lowest combined disruption risk (50.7/100) with optimized transit time (5h 54m).",
+      "status": "OPTIMIZED",
+      "createdAt": "2026-09-01T15:15:55.805Z"
+    },
+    {
+      "id": "MSN-2026-906",
+      "commodity": "Medical Supplies",
+      "origin": "Guwahati, Assam",
+      "destination": "Imphal, Manipur",
+      "cargoWeightTon": 2.5,
+      "priority": "CRITICAL",
+      "vehicleId": "AS-01-EC-9901",
+      "vehicleStatus": "ASSIGNED",
+      "recommendedRouteId": "PRIMARY-01",
+      "recommendedRouteName": "Primary NH Corridor (NH-27)",
+      "alternateRouteName": "Bypass Corridor via NH-27 Alternate",
+      "riskScore": 50.7,
+      "riskLevel": "MODERATE",
+      "weatherStatus": "LOW Risk (0.3mm rain) — Meteorological conditions along corridor are favorable. Average visibility 10.7 km with minimal precipitation.",
+      "eta": "5h 54m",
+      "estimatedDelayMinutes": 62,
+      "fuelEstimateLitres": 179,
+      "criticalCheckpoints": [
+        "Guwahati Dispatch Point",
+        "NH-27 Checkpoint",
+        "NH-29 Junction",
+        "Imphal Receiving Terminal"
+      ],
+      "justification": "Primary route provides lowest combined disruption risk (50.7/100) with optimized transit time (5h 54m).",
+      "status": "OPTIMIZED",
+      "createdAt": "2026-09-01T15:14:54.206Z"
+    },
+    {
+      "id": "MSN-2026-168",
+      "commodity": "Medical Supplies",
+      "origin": "Guwahati, Assam",
+      "destination": "Imphal, Manipur",
+      "cargoWeightTon": 2.5,
+      "priority": "CRITICAL",
+      "vehicleId": "AS-01-EC-9901",
+      "vehicleStatus": "ASSIGNED",
+      "recommendedRouteId": "PRIMARY-01",
+      "recommendedRouteName": "Primary NH Corridor (NH-27)",
+      "alternateRouteName": "Bypass Corridor via NH-27 Alternate",
+      "riskScore": 50.7,
+      "riskLevel": "MODERATE",
+      "weatherStatus": "LOW Risk (0.3mm rain) — Meteorological conditions along corridor are favorable. Average visibility 10.7 km with minimal precipitation.",
+      "eta": "5h 54m",
+      "estimatedDelayMinutes": 62,
+      "fuelEstimateLitres": 179,
+      "criticalCheckpoints": [
+        "Guwahati Dispatch Point",
+        "NH-27 Checkpoint",
+        "NH-29 Junction",
+        "Imphal Receiving Terminal"
+      ],
+      "justification": "Primary route provides lowest combined disruption risk (50.7/100) with optimized transit time (5h 54m).",
+      "status": "OPTIMIZED",
+      "createdAt": "2026-09-01T15:12:59.822Z"
+    },
+    {
+      "id": "MSN-2026-434",
+      "commodity": "Medical Supplies",
+      "origin": "Guwahati, Assam",
+      "destination": "Imphal, Manipur",
+      "cargoWeightTon": 2,
+      "priority": "CRITICAL",
+      "vehicleStatus": "ASSIGNED",
+      "recommendedRouteId": "PRIMARY-01",
+      "recommendedRouteName": "Primary NH Corridor (NH-27)",
+      "alternateRouteName": "Bypass Corridor via NH-27 Alternate",
+      "riskScore": 50.7,
+      "riskLevel": "MODERATE",
+      "weatherStatus": "Meteorological conditions along corridor are favorable. Average visibility 10.7 km with minimal precipitation. (0.3mm precip)",
+      "eta": "5h 54m",
+      "estimatedDelayMinutes": 62,
+      "fuelEstimateLitres": 170,
+      "criticalCheckpoints": [
+        "Guwahati Dispatch Point",
+        "NH-27 Checkpoint",
+        "NH-29 Junction",
+        "Imphal Receiving Terminal"
+      ],
+      "justification": "Primary route provides lowest combined disruption risk (50.7/100) with optimized transit time (5h 54m).",
+      "status": "OPTIMIZED",
+      "createdAt": "2026-09-01T15:04:35.861Z"
+    },
+    {
+      "id": "MSN-901",
+      "commodity": "Medical Supplies",
+      "origin": "Guwahati, Assam",
+      "destination": "Imphal, Manipur",
+      "cargoWeightTon": 2.5,
+      "priority": "CRITICAL",
+      "vehicleId": "AS-01-EC-9901",
+      "vehicleStatus": "IN TRANSIT",
+      "recommendedRouteId": "ALT-CORRIDOR-01",
+      "recommendedRouteName": "Bypass Corridor via NH-27 / NH-06 Alternate",
+      "alternateRouteName": "Primary Highway via NH-29",
+      "riskScore": 28.5,
+      "riskLevel": "LOW",
+      "weatherStatus": "Moderate Rain (12mm)",
+      "eta": "7h 20m",
+      "estimatedDelayMinutes": 25,
+      "fuelEstimateLitres": 142,
+      "criticalCheckpoints": [
+        "Guwahati Hub",
+        "Jorabat Junction",
+        "Lumding Pass",
+        "Imphal Transit Point"
+      ],
+      "justification": "Diverted from primary corridor to avoid active landslide warning at Mao Gate. Alternate corridor provides stable passage.",
+      "status": "IN_TRANSIT",
+      "createdAt": "2026-09-01T13:03:33.170Z"
+    },
+    {
+      "id": "MSN-902",
+      "commodity": "Emergency Food & Rations",
+      "origin": "Guwahati, Assam",
+      "destination": "Aizawl, Mizoram",
+      "cargoWeightTon": 5,
+      "priority": "HIGH",
+      "vehicleId": "MZ-01-FD-3310",
+      "vehicleStatus": "IN TRANSIT",
+      "recommendedRouteId": "PRIMARY",
+      "recommendedRouteName": "Primary Corridor via NH-06 / NH-306",
+      "alternateRouteName": "Silchar Hill Bypass",
+      "riskScore": 68.2,
+      "riskLevel": "CRITICAL",
+      "weatherStatus": "Heavy Rain (38mm), High Landslide Risk",
+      "eta": "8h 45m",
+      "estimatedDelayMinutes": 140,
+      "fuelEstimateLitres": 215,
+      "criticalCheckpoints": [
+        "Guwahati Hub",
+        "Meghalaya Plateau Gate",
+        "Silchar Transit Hub",
+        "Aizawl Civil Supply Depot"
+      ],
+      "justification": "High-clearance 4WD convoy assigned. Escort recommended through Sonapur tunnel segment due to mud runoff.",
+      "status": "IN_TRANSIT",
+      "createdAt": "2026-09-01T11:03:33.170Z"
+    }
+  ]
 }

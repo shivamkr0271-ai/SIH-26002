@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
-import { Bot, Send, User, ChevronRight, RefreshCw, AlertCircle, Sparkles, ShieldCheck } from 'lucide-react';
+import { Bot, Send, User, ChevronRight, RefreshCw, AlertCircle, Sparkles, ShieldCheck, MapPin } from 'lucide-react';
 import { api } from '@/services/api';
 
 interface Message {
@@ -24,15 +25,46 @@ const INITIAL_MESSAGES: Message[] = [
 ];
 
 const SUGGESTIONS = [
+  "Kohima se Imphal jaana hai. Safest route kaunsa hai?",
+  "What is the safest route for my current medical mission?",
+  "Why is this route risky?",
   "Which vehicles are delayed?",
-  "What is the current weather risk?",
-  "Which route is safest?",
-  "Why is Guwahati to Aizawl risky?",
   "What are the current major logistics bottlenecks?",
   "Show me the current fleet status."
 ];
 
+function extractRoutePair(text: string): { origin: string; dest: string } | null {
+  const t = text.toLowerCase();
+  const nerCityNames: Record<string, string> = {
+    'guwahati': 'Guwahati, Assam',
+    'shillong': 'Shillong, Meghalaya',
+    'silchar': 'Silchar, Assam',
+    'aizawl': 'Aizawl, Mizoram',
+    'imphal': 'Imphal, Manipur',
+    'kohima': 'Kohima, Nagaland',
+    'dimapur': 'Dimapur, Nagaland',
+    'agartala': 'Agartala, Tripura',
+    'itanagar': 'Itanagar, Arunachal Pradesh',
+    'gangtok': 'Gangtok, Sikkim',
+    'tezpur': 'Tezpur, Assam',
+    'jorhat': 'Jorhat, Assam'
+  };
+
+  const found: string[] = [];
+  for (const [key, full] of Object.entries(nerCityNames)) {
+    if (t.includes(key) && !found.includes(full)) {
+      found.push(full);
+    }
+  }
+
+  if (found.length >= 2) {
+    return { origin: found[0], dest: found[1] };
+  }
+  return null;
+}
+
 export default function AiAssistant() {
+  const navigate = useNavigate();
   const [messages, setMessages] = useState<Message[]>(INITIAL_MESSAGES);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -156,6 +188,22 @@ export default function AiAssistant() {
                 <div className="text-sm leading-relaxed whitespace-pre-wrap font-sans">
                   {msg.content}
                 </div>
+
+                {/* Interactive Action Button for Corridor Deep-Link (Feature 7) */}
+                {msg.role === 'ai' && (() => {
+                  const pair = extractRoutePair(msg.content);
+                  if (!pair) return null;
+                  return (
+                    <button
+                      type="button"
+                      onClick={() => navigate(`/route?origin=${encodeURIComponent(pair.origin)}&destination=${encodeURIComponent(pair.dest)}`)}
+                      className="mt-1 py-1.5 px-3 bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-400 border border-cyan-500/30 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-colors cursor-pointer w-fit"
+                    >
+                      <MapPin className="w-3.5 h-3.5 text-cyan-400" />
+                      Open in Route Intelligence ({pair.origin.split(',')[0]} ➔ {pair.dest.split(',')[0]})
+                    </button>
+                  );
+                })()}
 
                 {/* Sources / Provider Tag for AI Messages */}
                 {msg.role === 'ai' && msg.sources && msg.sources.length > 0 && (

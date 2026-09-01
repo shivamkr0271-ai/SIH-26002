@@ -51,6 +51,25 @@ async function request<T>(
     }
 
     if (!res.ok) {
+      // If 503 from Vite proxy, attempt direct connection to port 5000
+      if (res.status === 503) {
+        try {
+          const directRes = await fetch(`${directBase}${endpoint}`, {
+            headers: {
+              'Content-Type': 'application/json',
+              ...options?.headers,
+            },
+            ...options,
+          });
+          if (directRes.ok) {
+            const json = await directRes.json();
+            return { data: (json.data !== undefined ? json.data : json) as T, error: null };
+          }
+        } catch {
+          // continue to normal error handling
+        }
+      }
+
       const errBody = await res.json().catch(() => ({}));
       const fallbackMsg = res.status === 503 
         ? 'Backend routing server is unavailable on port 5000. Please start with "npm run dev:all".'

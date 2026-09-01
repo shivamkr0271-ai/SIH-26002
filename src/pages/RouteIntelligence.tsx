@@ -31,7 +31,7 @@ export interface RouteRiskClassification {
  * MODERATE (36-65): YELLOW/ORANGE (#f59e0b)
  * CRITICAL (>65): RED (#ef4444)
  */
-export function classifyRouteRisk(riskScore: number): RouteRiskClassification {
+function classifyRouteRisk(riskScore: number): RouteRiskClassification {
   if (riskScore <= 35) {
     return {
       level: 'LOW',
@@ -105,22 +105,41 @@ const incidentPin = L.divIcon({
   iconAnchor: [10, 10],
 });
 
+// Safe helper to resolve a NERLocation from string query
+function resolveNERLocation(query: string | null | undefined, fallback: NERLocation): NERLocation {
+  if (!query || typeof query !== 'string') return fallback;
+  const q = query.toLowerCase().trim();
+  return NER_LOCATIONS.find(l => 
+    l.name.toLowerCase() === q || 
+    `${l.name}, ${l.state}`.toLowerCase() === q ||
+    q.includes(l.name.toLowerCase()) ||
+    l.id.toLowerCase() === q
+  ) || fallback;
+}
+
 // Component to dynamically fit map bounds to the calculated route
 function MapBoundsFitter({ points }: { points: [number, number][] }) {
   const map = useMap();
   const prevBoundsRef = useRef<string>('');
 
   useEffect(() => {
-    if (!points || points.length < 2) return;
-    const key = `${points[0][0]},${points[0][1]}_${points[points.length - 1][0]},${points[points.length - 1][1]}_${points.length}`;
+    if (!points || !Array.isArray(points) || points.length < 2) return;
+    const validPoints = points.filter(p => Array.isArray(p) && p.length >= 2 && typeof p[0] === 'number' && !isNaN(p[0]) && typeof p[1] === 'number' && !isNaN(p[1]));
+    if (validPoints.length < 2) return;
+
+    const start = validPoints[0];
+    const end = validPoints[validPoints.length - 1];
+    const key = `${start[0].toFixed(3)},${start[1].toFixed(3)}_${end[0].toFixed(3)},${end[1].toFixed(3)}_${validPoints.length}`;
     if (prevBoundsRef.current === key) return;
     prevBoundsRef.current = key;
 
     try {
-      const bounds = L.latLngBounds(points);
-      map.fitBounds(bounds, { padding: [40, 40], maxZoom: 10 });
-    } catch (e) {
-      // ignore bounds calculation error
+      const bounds = L.latLngBounds(validPoints);
+      if (bounds.isValid()) {
+        map.fitBounds(bounds, { padding: [40, 40], maxZoom: 10 });
+      }
+    } catch {
+      // ignore bounds calculation error safely
     }
   }, [points, map]);
 
@@ -133,49 +152,19 @@ export default function RouteIntelligence() {
   const destParam = searchParams.get('destination');
 
   const [origin, setOrigin] = useState(() => {
-    if (originParam) {
-      const match = NER_LOCATIONS.find(l => 
-        l.name.toLowerCase() === originParam.toLowerCase() || 
-        `${l.name}, ${l.state}`.toLowerCase() === originParam.toLowerCase() ||
-        originParam.toLowerCase().includes(l.name.toLowerCase()) ||
-        l.id.toLowerCase() === originParam.toLowerCase()
-      );
-      if (match) return match.name;
-    }
-    return 'Guwahati';
+    return resolveNERLocation(originParam, NER_LOCATIONS[0]).name;
   });
 
   const [destination, setDestination] = useState(() => {
-    if (destParam) {
-      const match = NER_LOCATIONS.find(l => 
-        l.name.toLowerCase() === destParam.toLowerCase() || 
-        `${l.name}, ${l.state}`.toLowerCase() === destParam.toLowerCase() ||
-        destParam.toLowerCase().includes(l.name.toLowerCase()) ||
-        l.id.toLowerCase() === destParam.toLowerCase()
-      );
-      if (match) return match.name;
-    }
-    return 'Aizawl';
+    return resolveNERLocation(destParam, NER_LOCATIONS[1]).name;
   });
 
   useEffect(() => {
     if (originParam) {
-      const match = NER_LOCATIONS.find(l => 
-        l.name.toLowerCase() === originParam.toLowerCase() || 
-        `${l.name}, ${l.state}`.toLowerCase() === originParam.toLowerCase() ||
-        originParam.toLowerCase().includes(l.name.toLowerCase()) ||
-        l.id.toLowerCase() === originParam.toLowerCase()
-      );
-      if (match) setOrigin(match.name);
+      setOrigin(resolveNERLocation(originParam, NER_LOCATIONS[0]).name);
     }
     if (destParam) {
-      const match = NER_LOCATIONS.find(l => 
-        l.name.toLowerCase() === destParam.toLowerCase() || 
-        `${l.name}, ${l.state}`.toLowerCase() === destParam.toLowerCase() ||
-        destParam.toLowerCase().includes(l.name.toLowerCase()) ||
-        l.id.toLowerCase() === destParam.toLowerCase()
-      );
-      if (match) setDestination(match.name);
+      setDestination(resolveNERLocation(destParam, NER_LOCATIONS[1]).name);
     }
   }, [originParam, destParam]);
 
@@ -208,34 +197,37 @@ export default function RouteIntelligence() {
   }, [origin]);
 
   const destLoc = useMemo(() => {
-    return NER_LOCATIONS.find(l => l.name === destination) || NER_LOCATIONS[1];
+    return resolveNERLocation(destination, NER_LOCATIONS[1]);
   }, [destination]);
 
-  const handleAnalyze = async () => {
+  const handleAnalyze = async (overrideOriginLoc?: NERLocation, overrideDestLoc?: NERLocation) => {
+    const fromLoc = overrideOriginLoc || originLoc;
+    const toLoc = overrideDestLoc || destLoc;
+
     // Guard against duplicate clicks or already running request
-    if (isAnalyzingRef.current || analyzing) {
+    if (isAnalyzingRef.current) {
       return;
     }
 
     // 1. Check presence
-    if (!origin || !destination) {
+    if (!fromLoc || !toLoc) {
       setErrorMessage('Please select both an Origin and a Destination transit node.');
       return;
     }
 
     // 2. Check equality
-    if (origin.trim().toLowerCase() === destination.trim().toLowerCase()) {
+    if (fromLoc.id === toLoc.id || fromLoc.name.trim().toLowerCase() === toLoc.name.trim().toLowerCase()) {
       setErrorMessage('Origin and Destination cannot be the same. Please select different points.');
       return;
     }
 
     // 3. Check coordinates validity
-    if (!originLoc || typeof originLoc.lat !== 'number' || isNaN(originLoc.lat) || typeof originLoc.lng !== 'number' || isNaN(originLoc.lng)) {
-      setErrorMessage(`Invalid geographical coordinates for origin node "${origin}".`);
+    if (typeof fromLoc.lat !== 'number' || isNaN(fromLoc.lat) || typeof fromLoc.lng !== 'number' || isNaN(fromLoc.lng)) {
+      setErrorMessage(`Invalid geographical coordinates for origin node "${fromLoc.name}".`);
       return;
     }
-    if (!destLoc || typeof destLoc.lat !== 'number' || isNaN(destLoc.lat) || typeof destLoc.lng !== 'number' || isNaN(destLoc.lng)) {
-      setErrorMessage(`Invalid geographical coordinates for destination node "${destination}".`);
+    if (typeof toLoc.lat !== 'number' || isNaN(toLoc.lat) || typeof toLoc.lng !== 'number' || isNaN(toLoc.lng)) {
+      setErrorMessage(`Invalid geographical coordinates for destination node "${toLoc.name}".`);
       return;
     }
 
@@ -245,8 +237,8 @@ export default function RouteIntelligence() {
 
     try {
       const res = await api.calculateRoute({
-        origin: `${originLoc.name}, ${originLoc.state}`,
-        destination: `${destLoc.name}, ${destLoc.state}`,
+        origin: `${fromLoc.name}, ${fromLoc.state}`,
+        destination: `${toLoc.name}, ${toLoc.state}`,
         cargoType,
         vehicleType,
         priority
@@ -259,7 +251,7 @@ export default function RouteIntelligence() {
         setErrorMessage(res.error || 'Failed to analyze route. Please verify server connectivity on port 5000.');
       }
     } catch (err: any) {
-      setErrorMessage(err.message || 'An unexpected error occurred during route analysis.');
+      setErrorMessage(err?.message || 'An unexpected error occurred during route analysis.');
     } finally {
       isAnalyzingRef.current = false;
       setAnalyzing(false);
@@ -269,34 +261,44 @@ export default function RouteIntelligence() {
   const [selectedRouteId, setSelectedRouteId] = useState<string>('PRIMARY');
 
   // Auto-analyze route when origin and destination are passed via URL query params
-  const hasAutoAnalyzedRef = useRef(false);
+  const lastAnalyzedKeyRef = useRef<string>('');
   useEffect(() => {
-    if (originParam && destParam && !hasAutoAnalyzedRef.current && origin !== destination) {
-      hasAutoAnalyzedRef.current = true;
-      handleAnalyze();
+    if (originParam && destParam) {
+      const resolvedFrom = resolveNERLocation(originParam, NER_LOCATIONS[0]);
+      const resolvedTo = resolveNERLocation(destParam, NER_LOCATIONS[1]);
+
+      if (resolvedFrom.id !== resolvedTo.id) {
+        const paramKey = `${resolvedFrom.id}->${resolvedTo.id}`;
+        if (lastAnalyzedKeyRef.current !== paramKey) {
+          lastAnalyzedKeyRef.current = paramKey;
+          setOrigin(resolvedFrom.name);
+          setDestination(resolvedTo.name);
+          handleAnalyze(resolvedFrom, resolvedTo);
+        }
+      }
     }
-  }, [originParam, destParam, origin, destination]);
+  }, [originParam, destParam]);
 
   // Memoize all evaluated route options with shared risk classification
   const allRouteOptions = useMemo(() => {
     if (!routeResult) return [];
 
     const primaryRiskScore = Number(
-      (routeResult.mlPrediction ? routeResult.mlPrediction.disruptionProbability : routeResult.prototypeRiskScore).toFixed(1)
+      (routeResult.mlPrediction?.disruptionProbability ?? routeResult.prototypeRiskScore ?? 45).toFixed(1)
     );
     const primaryClassification = classifyRouteRisk(primaryRiskScore);
 
     const routes = [
       {
         id: 'PRIMARY',
-        name: `Primary Highway Corridor (${routeResult.origin.split(',')[0]} ↔ ${routeResult.destination.split(',')[0]})`,
-        distanceKm: routeResult.distanceKm,
-        estimatedTravelTime: routeResult.estimatedTravelTime,
-        estimatedDelayMinutes: routeResult.mlPrediction ? routeResult.mlPrediction.estimatedDelayMinutes : routeResult.estimatedDelayMinutes,
+        name: `Primary Highway Corridor (${(routeResult.origin || originLoc.name).split(',')[0]} ↔ ${(routeResult.destination || destLoc.name).split(',')[0]})`,
+        distanceKm: routeResult.distanceKm ?? 0,
+        estimatedTravelTime: routeResult.estimatedTravelTime ?? '2h 30m',
+        estimatedDelayMinutes: routeResult.mlPrediction?.estimatedDelayMinutes ?? routeResult.estimatedDelayMinutes ?? 0,
         riskScore: primaryRiskScore,
         classification: primaryClassification,
-        path: routeResult.recommendedRoute,
-        accessibilityScore: routeResult.accessibilityScore,
+        path: (routeResult.recommendedRoute && routeResult.recommendedRoute.length >= 2) ? routeResult.recommendedRoute : [[originLoc.lat, originLoc.lng], [destLoc.lat, destLoc.lng]] as [number, number][],
+        accessibilityScore: routeResult.accessibilityScore ?? 80,
         majorFactors: [
           routeResult.weatherSummary ? `Weather: ${routeResult.weatherSummary.overallWeatherRisk}` : null,
           routeResult.mlPrediction ? `Landslide: ${routeResult.mlPrediction.landslideRisk}` : null,
@@ -305,19 +307,20 @@ export default function RouteIntelligence() {
       }
     ];
 
-    if (routeResult.alternativeRoutes && routeResult.alternativeRoutes.length > 0) {
+    if (routeResult.alternativeRoutes && Array.isArray(routeResult.alternativeRoutes)) {
       routeResult.alternativeRoutes.forEach((alt, idx) => {
-        const altScore = Number(alt.prototypeRiskScore.toFixed(1));
+        if (!alt) return;
+        const altScore = Number((alt.prototypeRiskScore ?? 50).toFixed(1));
         const altClassification = classifyRouteRisk(altScore);
         routes.push({
           id: alt.id || `ALT-${idx + 1}`,
           name: alt.name || `Alternative Bypass Corridor ${idx + 1}`,
-          distanceKm: alt.distanceKm,
-          estimatedTravelTime: alt.estimatedTravelTime,
+          distanceKm: alt.distanceKm ?? 0,
+          estimatedTravelTime: alt.estimatedTravelTime ?? '3h 00m',
           estimatedDelayMinutes: Math.max(10, Math.round(primaryClassification.level === 'CRITICAL' ? 25 : (altScore * 0.75))),
           riskScore: altScore,
           classification: altClassification,
-          path: alt.path,
+          path: (alt.path && alt.path.length >= 2) ? alt.path : routes[0].path,
           accessibilityScore: Math.max(15, Math.round(100 - altScore)),
           majorFactors: 'Bypass passage avoiding primary roadblocks & sector congestion'
         });
@@ -329,7 +332,7 @@ export default function RouteIntelligence() {
       ...r,
       isSafest: r.riskScore === minRisk
     }));
-  }, [routeResult]);
+  }, [routeResult, originLoc, destLoc]);
 
   // Auto-select safest route when new route results are loaded
   useEffect(() => {
@@ -346,24 +349,28 @@ export default function RouteIntelligence() {
   }, [allRouteOptions, selectedRouteId]);
 
   const routePoints = useMemo<[number, number][]>(() => {
-    if (activeRoute && activeRoute.path && activeRoute.path.length > 0) {
+    if (activeRoute?.path && activeRoute.path.length >= 2) {
       return activeRoute.path;
     }
-    if (routeResult && routeResult.recommendedRoute && routeResult.recommendedRoute.length > 0) {
+    if (routeResult?.recommendedRoute && routeResult.recommendedRoute.length >= 2) {
       return routeResult.recommendedRoute;
     }
+    const origLat = typeof originLoc?.lat === 'number' && !isNaN(originLoc.lat) ? originLoc.lat : 26.1445;
+    const origLng = typeof originLoc?.lng === 'number' && !isNaN(originLoc.lng) ? originLoc.lng : 91.7362;
+    const dstLat = typeof destLoc?.lat === 'number' && !isNaN(destLoc.lat) ? destLoc.lat : 23.7307;
+    const dstLng = typeof destLoc?.lng === 'number' && !isNaN(destLoc.lng) ? destLoc.lng : 92.7173;
     return [
-      [originLoc.lat, originLoc.lng],
-      [destLoc.lat, destLoc.lng]
+      [origLat, origLng],
+      [dstLat, dstLng]
     ];
-  }, [activeRoute, routeResult, originLoc.lat, originLoc.lng, destLoc.lat, destLoc.lng]);
+  }, [activeRoute, routeResult, originLoc, destLoc]);
 
   // Feature 2: Explainable Route Risk Breakdown
   const breakdownFactors = useMemo(() => {
-    if (routeResult?.riskBreakdown && routeResult.riskBreakdown.length > 0) {
+    if (routeResult?.riskBreakdown && Array.isArray(routeResult.riskBreakdown) && routeResult.riskBreakdown.length > 0) {
       return routeResult.riskBreakdown;
     }
-    const score = activeRoute?.riskScore || 50;
+    const score = activeRoute?.riskScore ?? routeResult?.prototypeRiskScore ?? 50;
     const rain = Math.round(score * 0.32);
     const landslide = Math.round(score * 0.38);
     const road = Math.round(score * 0.18);
@@ -378,12 +385,12 @@ export default function RouteIntelligence() {
 
   // Feature 3: Predictive Disruption Timeline
   const timelinePoints = useMemo(() => {
-    if (routeResult?.predictiveTimeline && routeResult.predictiveTimeline.length > 0) {
+    if (routeResult?.predictiveTimeline && Array.isArray(routeResult.predictiveTimeline) && routeResult.predictiveTimeline.length > 0) {
       return routeResult.predictiveTimeline;
     }
-    const score = activeRoute?.riskScore || 45;
+    const score = activeRoute?.riskScore ?? routeResult?.prototypeRiskScore ?? 45;
     return [
-      { timepoint: 'NOW', riskLevel: activeRoute?.classification.level || 'LOW', riskScore: score, statusIcon: activeRoute?.classification.statusIcon || '🟢', rainfallForecastMm: 12, reason: 'Stable meteorological baseline with clear highway transit.', isLive: true },
+      { timepoint: 'NOW', riskLevel: activeRoute?.classification?.level ?? 'LOW', riskScore: score, statusIcon: activeRoute?.classification?.statusIcon ?? '🟢', rainfallForecastMm: 12, reason: 'Stable meteorological baseline with clear highway transit.', isLive: true },
       { timepoint: '+2 HOURS', riskLevel: score > 50 ? 'HIGH' : 'MODERATE', riskScore: Math.min(95, score + 12), statusIcon: score > 50 ? '🔴' : '🟡', rainfallForecastMm: 24, reason: 'Expected increase in rainfall intensity combined with vulnerable terrain may increase disruption probability.', isLive: false },
       { timepoint: '+5 HOURS', riskLevel: score > 40 ? 'CRITICAL' : 'HIGH', riskScore: Math.min(99, score + 22), statusIcon: '🔴', rainfallForecastMm: 38, reason: 'Extended meteorological forecast projects cumulative saturation elevating landslide susceptibility.', isLive: false }
     ];
@@ -627,20 +634,20 @@ export default function RouteIntelligence() {
                 <div className="mt-4 pt-3 border-t border-gray-200 dark:border-white/10 space-y-2">
                   <div className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest flex items-center justify-between">
                     <span>🌦️ Live Corridor Meteorology</span>
-                    <span className="text-[9px] text-gray-400">Risk: {routeResult.weatherSummary.overallWeatherRisk}</span>
+                    <span className="text-[9px] text-gray-400">Risk: {routeResult.weatherSummary.overallWeatherRisk || 'LOW'}</span>
                   </div>
                   <div className="grid grid-cols-3 gap-2 text-center text-xs">
                     <div className="bg-black/30 p-2 rounded border border-white/5">
                       <div className="text-[9px] text-gray-400 uppercase">Temp</div>
-                      <div className="font-bold text-white font-mono">{routeResult.weatherSummary.originWeather.temperature}°C</div>
+                      <div className="font-bold text-white font-mono">{routeResult.weatherSummary.originWeather?.temperature ?? 24}°C</div>
                     </div>
                     <div className="bg-black/30 p-2 rounded border border-white/5">
                       <div className="text-[9px] text-gray-400 uppercase">Precip</div>
-                      <div className="font-bold text-cyan-400 font-mono">{routeResult.weatherSummary.maxPrecipitationMm}mm</div>
+                      <div className="font-bold text-cyan-400 font-mono">{routeResult.weatherSummary.maxPrecipitationMm ?? 0}mm</div>
                     </div>
                     <div className="bg-black/30 p-2 rounded border border-white/5">
                       <div className="text-[9px] text-gray-400 uppercase">Vis.</div>
-                      <div className="font-bold text-emerald-400 font-mono">{routeResult.weatherSummary.avgVisibilityKm}km</div>
+                      <div className="font-bold text-emerald-400 font-mono">{routeResult.weatherSummary.avgVisibilityKm ?? 10}km</div>
                     </div>
                   </div>
                 </div>
@@ -655,7 +662,7 @@ export default function RouteIntelligence() {
           {/* Map Container */}
           <Card noPadding className="h-[460px] relative overflow-hidden group border-gray-200 dark:border-white/5 shadow-2xl bg-gray-50 dark:bg-[#0a0c14] rounded-xl">
             <MapContainer 
-              center={[originLoc.lat, originLoc.lng]} 
+              center={[typeof originLoc?.lat === 'number' && !isNaN(originLoc.lat) ? originLoc.lat : 26.1445, typeof originLoc?.lng === 'number' && !isNaN(originLoc.lng) ? originLoc.lng : 91.7362]} 
               zoom={7} 
               className="w-full h-full z-0"
               zoomControl={true}
@@ -668,25 +675,25 @@ export default function RouteIntelligence() {
               <MapBoundsFitter points={routePoints} />
 
               {/* Origin Marker */}
-              <Marker position={[originLoc.lat, originLoc.lng]} icon={createPinIcon('#06b6d4', 'A')}>
+              <Marker position={[typeof originLoc?.lat === 'number' && !isNaN(originLoc.lat) ? originLoc.lat : 26.1445, typeof originLoc?.lng === 'number' && !isNaN(originLoc.lng) ? originLoc.lng : 91.7362]} icon={createPinIcon('#06b6d4', 'A')}>
                 <Popup className="custom-popup">
                   <div className="p-1">
                     <div className="text-[10px] font-bold text-cyan-400 uppercase tracking-wider">Origin Transit Node</div>
-                    <h4 className="font-bold text-sm text-white">{originLoc.name}</h4>
-                    <p className="text-xs text-gray-400">{originLoc.district}, {originLoc.state}</p>
-                    <p className="text-[10px] text-gray-500 mt-1 font-mono">Elev: {originLoc.elevationMeters}m</p>
+                    <h4 className="font-bold text-sm text-white">{originLoc?.name || 'Origin'}</h4>
+                    <p className="text-xs text-gray-400">{originLoc?.district || ''}, {originLoc?.state || ''}</p>
+                    <p className="text-[10px] text-gray-500 mt-1 font-mono">Elev: {originLoc?.elevationMeters || 0}m</p>
                   </div>
                 </Popup>
               </Marker>
 
               {/* Destination Marker */}
-              <Marker position={[destLoc.lat, destLoc.lng]} icon={createPinIcon('#10b981', 'B')}>
+              <Marker position={[typeof destLoc?.lat === 'number' && !isNaN(destLoc.lat) ? destLoc.lat : 23.7307, typeof destLoc?.lng === 'number' && !isNaN(destLoc.lng) ? destLoc.lng : 92.7173]} icon={createPinIcon('#10b981', 'B')}>
                 <Popup className="custom-popup">
                   <div className="p-1">
                     <div className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">Destination Hub</div>
-                    <h4 className="font-bold text-sm text-white">{destLoc.name}</h4>
-                    <p className="text-xs text-gray-400">{destLoc.district}, {destLoc.state}</p>
-                    <p className="text-[10px] text-gray-500 mt-1 font-mono">Elev: {destLoc.elevationMeters}m</p>
+                    <h4 className="font-bold text-sm text-white">{destLoc?.name || 'Destination'}</h4>
+                    <p className="text-xs text-gray-400">{destLoc?.district || ''}, {destLoc?.state || ''}</p>
+                    <p className="text-[10px] text-gray-500 mt-1 font-mono">Elev: {destLoc?.elevationMeters || 0}m</p>
                   </div>
                 </Popup>
               </Marker>
@@ -696,13 +703,14 @@ export default function RouteIntelligence() {
                 const isSelected = selectedRouteId === opt.id;
                 if (opt.id === 'PRIMARY' && !showPrimaryRoute) return null;
                 if (opt.id !== 'PRIMARY' && !showAltRoute) return null;
+                if (!opt.path || !Array.isArray(opt.path) || opt.path.length < 2) return null;
 
                 return (
                   <Polyline 
                     key={opt.id}
                     positions={opt.path} 
                     pathOptions={{ 
-                      color: opt.classification.lineColor, // GREEN (#10b981), YELLOW (#f59e0b), or RED (#ef4444)
+                      color: opt.classification?.lineColor || '#06b6d4',
                       weight: isSelected ? 6 : 4, 
                       opacity: isSelected ? 1.0 : 0.65,
                       dashArray: isSelected ? undefined : '6, 6'
@@ -734,18 +742,21 @@ export default function RouteIntelligence() {
               })}
 
               {/* Nearby Incidents Markers */}
-              {showIncidents && routeResult && routeResult.nearbyIncidents && routeResult.nearbyIncidents.map(inc => (
-                <Marker key={inc.id} position={inc.location} icon={incidentPin}>
-                  <Popup className="custom-popup">
-                    <div className="p-1">
-                      <Badge variant="error" className="mb-1">{inc.severity}</Badge>
-                      <h4 className="font-bold text-xs text-white">{inc.title}</h4>
-                      <p className="text-[10px] text-gray-400">{inc.locationName}</p>
-                      <p className="text-[10px] text-amber-400 mt-1 font-mono">Distance to Corridor: {inc.distanceFromRouteKm} km</p>
-                    </div>
-                  </Popup>
-                </Marker>
-              ))}
+              {showIncidents && routeResult?.nearbyIncidents && Array.isArray(routeResult.nearbyIncidents) && routeResult.nearbyIncidents.map(inc => {
+                if (!inc || !Array.isArray(inc.location) || inc.location.length < 2 || typeof inc.location[0] !== 'number' || typeof inc.location[1] !== 'number') return null;
+                return (
+                  <Marker key={inc.id || Math.random()} position={inc.location} icon={incidentPin}>
+                    <Popup className="custom-popup">
+                      <div className="p-1">
+                        <Badge variant="error" className="mb-1">{inc.severity || 'CRITICAL'}</Badge>
+                        <h4 className="font-bold text-xs text-white">{inc.title}</h4>
+                        <p className="text-[10px] text-gray-400">{inc.locationName}</p>
+                        <p className="text-[10px] text-amber-400 mt-1 font-mono">Distance to Corridor: {inc.distanceFromRouteKm} km</p>
+                      </div>
+                    </Popup>
+                  </Marker>
+                );
+              })}
             </MapContainer>
             
             {/* Top-Left Floating Overlay Badge */}

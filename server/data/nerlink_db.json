@@ -75,6 +75,22 @@
   ],
   "incidents": [
     {
+      "id": "INC-1509",
+      "title": "Landslide: Sonapur Ghat Sector",
+      "type": "Landslide",
+      "severity": "CRITICAL",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Sonapur Ghat Sector",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Major boulder slide obstructing left carriageway. Heavy traffic slowing down.",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-09-01T16:06:40.796Z"
+    },
+    {
       "id": "INC-MSN-837",
       "title": "Mission Corridor Caution: Construction Materials (MSN-2026-969)",
       "type": "Traffic",
@@ -759,6 +775,16 @@
   ],
   "fieldReports": [
     {
+      "id": "FR-1509",
+      "incidentType": "Landslide",
+      "locationName": "Sonapur Ghat Sector",
+      "description": "Major boulder slide obstructing left carriageway. Heavy traffic slowing down.",
+      "severity": "CRITICAL",
+      "officerName": "Inspector Sarma",
+      "status": "SYNCED",
+      "timestamp": "2026-09-01T16:06:40.796Z"
+    },
+    {
       "id": "FR-9819",
       "incidentType": "Landslide",
       "locationName": "Sonapur Ghat Sector",
@@ -947,6 +973,41 @@
     }
   ],
   "activities": [
+    {
+      "id": "act-4htzxce",
+      "action": "Incident alert INC-1509 declared: Landslide: Sonapur Ghat Sector",
+      "time": "2026-09-01T16:06:40.797Z",
+      "type": "incident",
+      "relatedId": "INC-1509"
+    },
+    {
+      "id": "act-s4tdqlt",
+      "action": "Field report FR-1509 submitted by Inspector Sarma",
+      "time": "2026-09-01T16:06:40.796Z",
+      "type": "report",
+      "relatedId": "FR-1509"
+    },
+    {
+      "id": "act-n2cryqk",
+      "action": "Vehicle NER-DEMO-99 registered",
+      "time": "2026-09-01T16:06:40.768Z",
+      "type": "vehicle",
+      "relatedId": "NER-DEMO-99"
+    },
+    {
+      "id": "act-xrkq1ra",
+      "action": "Mission MSN-2026-419 created: Medical Supplies (Guwahati, Assam → Imphal, Manipur)",
+      "time": "2026-09-01T16:05:51.699Z",
+      "type": "mission",
+      "relatedId": "MSN-2026-419"
+    },
+    {
+      "id": "act-n0enbld",
+      "action": "Vehicle NER-MED-204 status updated (IN TRANSIT)",
+      "time": "2026-09-01T16:05:51.690Z",
+      "type": "vehicle",
+      "relatedId": "NER-MED-204"
+    },
     {
       "id": "act-0n1km7m",
       "action": "Incident alert INC-MSN-837 declared: Mission Corridor Caution: Construction Materials (MSN-2026-969)",
@@ -1611,44 +1672,17 @@
       "time": "2026-08-28T18:14:14.809Z",
       "type": "vehicle",
       "relatedId": "TEST-VEH-1787940854796"
-    },
-    {
-      "id": "act-mhat18j",
-      "action": "Field report FR-TEST-1787939501967 deleted",
-      "time": "2026-08-28T17:51:42.043Z",
-      "type": "report",
-      "relatedId": "FR-TEST-1787939501967"
-    },
-    {
-      "id": "act-3uepd22",
-      "action": "Incident alert INC-1967 declared: Landslide: Jorhat Bypass Highway",
-      "time": "2026-08-28T17:51:41.986Z",
-      "type": "incident",
-      "relatedId": "INC-1967"
-    },
-    {
-      "id": "act-sy0du8a",
-      "action": "Field report FR-TEST-1787939501967 submitted by Patrol unit 4",
-      "time": "2026-08-28T17:51:41.986Z",
-      "type": "report",
-      "relatedId": "FR-TEST-1787939501967"
-    },
-    {
-      "id": "act-x0r4ar7",
-      "action": "Vehicle TEST-VEH-1787939501890 decommissioned",
-      "time": "2026-08-28T17:51:41.937Z",
-      "type": "vehicle",
-      "relatedId": "TEST-VEH-1787939501890"
-    },
-    {
-      "id": "act-mxaf048",
-      "action": "Vehicle TEST-VEH-1787939501890 registered",
-      "time": "2026-08-28T17:51:41.902Z",
-      "type": "vehicle",
-      "relatedId": "TEST-VEH-1787939501890"
     }
   ],
   "notifications": [
+    {
+      "id": "notif-rn6jat7",
+      "title": "CRITICAL DISRUPTION",
+      "message": "Landslide: Sonapur Ghat Sector at Sonapur Ghat Sector",
+      "time": "2026-09-01T16:06:40.797Z",
+      "read": false,
+      "type": "critical"
+    },
     {
       "id": "notif-c0ei3md",
       "title": "CRITICAL DISRUPTION",
@@ -2040,22 +2074,42 @@
       "time": "2026-08-28T17:46:50.998Z",
       "read": false,
       "type": "success"
-    },
-    {
-      "id": "notif-22r157e",
-      "title": "Route Analyzed",
-      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
-      "time": "2026-08-28T17:46:50.981Z",
-      "read": false,
-      "type": "success"
     }
   ],
   "meta": {
     "version": "2.4.0",
-    "lastUpdated": "2026-09-01T15:22:08.254Z",
+    "lastUpdated": "2026-09-01T16:06:40.807Z",
     "isEmergency": false
   },
   "missions": [
+    {
+      "id": "MSN-2026-419",
+      "commodity": "Medical Supplies",
+      "origin": "Guwahati, Assam",
+      "destination": "Imphal, Manipur",
+      "cargoWeightTon": 2.5,
+      "priority": "CRITICAL",
+      "vehicleId": "NER-MED-204",
+      "vehicleStatus": "IN TRANSIT",
+      "recommendedRouteId": "PRIMARY-01",
+      "recommendedRouteName": "Primary NH Corridor (NH-27)",
+      "alternateRouteName": "Bypass Corridor via NH-27 Alternate",
+      "riskScore": 50.8,
+      "riskLevel": "MODERATE",
+      "weatherStatus": "HIGH Risk (0.4mm rain) — WEATHER WARNING: Heavy rainfall (0.4 mm) and reduced visibility (11 km) detected. High-clearance convoy with fog lamps recommended.",
+      "eta": "5h 54m",
+      "estimatedDelayMinutes": 62,
+      "fuelEstimateLitres": 179,
+      "criticalCheckpoints": [
+        "Guwahati Dispatch Point",
+        "NH-27 Checkpoint",
+        "NH-29 Junction",
+        "Imphal Receiving Terminal"
+      ],
+      "justification": "Primary route provides lowest combined disruption risk (50.8/100) with optimized transit time (5h 54m).",
+      "status": "OPTIMIZED",
+      "createdAt": "2026-09-01T16:05:51.699Z"
+    },
     {
       "id": "MSN-2026-969",
       "commodity": "Construction Materials",

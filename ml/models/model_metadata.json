@@ -1,0 +1,27 @@
+{
+  "name": "NER Logistics Disruption Risk Ensemble",
+  "version": "1.4.0-prototype",
+  "features": [
+    "rainfall_mm",
+    "rainfall_intensity",
+    "elevation_meters",
+    "terrain_grade",
+    "historical_incidents",
+    "active_incidents",
+    "road_condition",
+    "bridge_condition",
+    "traffic_level",
+    "route_distance_km",
+    "route_duration_mins",
+    "incident_severity"
+  ],
+  "metrics": {
+    "mae": 16.6,
+    "rmse": 19.63,
+    "r2_score": 0.1854,
+    "accuracy_percent": 40.6,
+    "evaluation_samples": 700
+  },
+  "is_prototype": true,
+  "notice": "Trained on synthetic geographical terrain & meteorological simulation for North Eastern Region."
+}

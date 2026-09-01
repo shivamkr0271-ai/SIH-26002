@@ -12,8 +12,32 @@ export default defineConfig(() => {
       },
     },
     server: {
+      port: 3000,
+      host: '0.0.0.0',
+      proxy: {
+        '/api': {
+          target: 'http://127.0.0.1:5000',
+          changeOrigin: true,
+          secure: false,
+          ws: false,
+          configure: (proxy, _options) => {
+            proxy.on('error', (err, _req, res: any) => {
+              if (res && !res.headersSent && typeof res.writeHead === 'function') {
+                res.writeHead(503, {
+                  'Content-Type': 'application/json',
+                });
+                res.end(JSON.stringify({
+                  success: false,
+                  error: 'Backend API server unavailable on port 5000. Running in offline fallback mode.',
+                  isOffline: true
+                }));
+              }
+            });
+          },
+        },
+      },
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
+      // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
       // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
       watch: process.env.DISABLE_HMR === 'true' ? null : {},

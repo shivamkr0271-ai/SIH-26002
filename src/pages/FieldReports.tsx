@@ -81,13 +81,26 @@ export default function FieldReports() {
     setSubmitting(true);
     setTimeout(() => {
       setSubmitting(false);
-      if(editingReport) {
-        updateReport(formData as FieldReport);
+      const reportPayload: FieldReport = {
+        id: formData.id || ('FR-' + Math.floor(Math.random() * 9000 + 1000)),
+        incidentType: formData.incidentType || 'Landslide',
+        locationName: formData.locationName || 'Guwahati Highway',
+        description: formData.description || 'Disruption observed by patrol team',
+        severity: formData.severity || 'WARNING',
+        officerName: formData.officerName || 'Field Officer',
+        status: formData.status || 'ACTIVE',
+        timestamp: formData.timestamp || new Date().toISOString(),
+        latitude: formData.latitude,
+        longitude: formData.longitude
+      };
+
+      if (editingReport) {
+        updateReport(reportPayload);
       } else {
-        addReport(formData as FieldReport);
+        addReport(reportPayload);
       }
       setIsModalOpen(false);
-    }, 1000);
+    }, 400);
   };
 
   return (

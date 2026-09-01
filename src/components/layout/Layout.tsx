@@ -19,7 +19,8 @@ import {
   ChevronLeft,
   ChevronRight,
   Menu,
-  Activity
+  Activity,
+  Clock
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
@@ -45,9 +46,9 @@ export default function Layout() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Update time
+  // Update time continuously every 1 second
   useEffect(() => {
-    const timer = setInterval(() => setTime(new Date()), 60000);
+    const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
 
@@ -133,8 +134,9 @@ export default function Layout() {
             <span>System Status</span>
             <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)] shrink-0" />
           </div>
-          <div className={cn("text-[11px] font-mono text-gray-600 dark:text-gray-400 truncate tracking-wider", !isSidebarOpen && "lg:hidden")}>
-            SYNC: {format(time, 'HH:mm:ss')}
+          <div className={cn("flex items-center gap-1.5 text-[11px] font-mono text-cyan-600 dark:text-cyan-400 truncate tracking-wider", !isSidebarOpen && "lg:hidden")}>
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse"></span>
+            <span>SYNC: {format(time, 'HH:mm:ss')}</span>
           </div>
           <button 
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -187,9 +189,52 @@ export default function Layout() {
               {isPresenting ? "Exit Presentation Mode" : "Presentation Mode"}
             </button>
             
-            <div className="hidden sm:flex flex-col items-end mr-4">
-              <div className="text-[12px] font-mono text-gray-800 dark:text-gray-200">{format(time, 'HH:mm:ss')} UTC</div>
-              <div className="text-[9px] text-gray-500 uppercase tracking-widest font-bold">Last synchronized {time.getSeconds() % 5}s ago</div>
+            {/* Premium Live Operational Clock Widget */}
+            <div className="hidden sm:flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-gray-100/90 dark:bg-[#0a0f1d] border border-cyan-500/20 dark:border-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.12)] backdrop-blur-md relative group cursor-default select-none">
+              <div className="flex items-center gap-2 pr-2.5 border-r border-gray-300 dark:border-white/10">
+                <div className="relative flex items-center justify-center">
+                  <span className="w-2 h-2 rounded-full bg-cyan-500 animate-ping absolute opacity-75" />
+                  <span className="w-2 h-2 rounded-full bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.9)]" />
+                </div>
+                <Clock className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400 shrink-0" />
+                <span className="text-[11px] font-bold tracking-wider text-gray-600 dark:text-gray-300 uppercase">
+                  {format(time, 'EEE, dd MMM')}
+                </span>
+              </div>
+              
+              <div className="flex items-baseline gap-0.5 font-mono">
+                <span className="text-sm font-bold text-gray-900 dark:text-white tracking-widest">
+                  {format(time, 'HH:mm')}
+                </span>
+                <span className="text-xs font-bold text-cyan-600 dark:text-cyan-400 animate-pulse">
+                  :{format(time, 'ss')}
+                </span>
+                <span className="text-[9px] font-sans font-bold uppercase px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 ml-1.5 border border-cyan-500/20">
+                  LIVE
+                </span>
+              </div>
+
+              {/* Hover Tooltip showing dual timezones */}
+              <div className="absolute top-full right-0 mt-2 w-52 bg-white dark:bg-[#0a0c14] border border-gray-200 dark:border-white/10 rounded-lg p-3 shadow-2xl opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-200 z-[9999]">
+                <div className="text-[9px] uppercase tracking-widest text-gray-500 font-bold mb-2 pb-1.5 border-b border-gray-100 dark:border-white/5 flex items-center justify-between">
+                  <span>Mission Synchronizer</span>
+                  <span className="text-emerald-500">Active</span>
+                </div>
+                <div className="space-y-1.5 text-xs font-mono">
+                  <div className="flex justify-between text-gray-700 dark:text-gray-300">
+                    <span className="text-gray-400 text-[10px]">Local (IST):</span>
+                    <span className="font-bold">{format(time, 'HH:mm:ss')}</span>
+                  </div>
+                  <div className="flex justify-between text-gray-700 dark:text-gray-300">
+                    <span className="text-gray-400 text-[10px]">UTC Time:</span>
+                    <span>{time.toISOString().substring(11, 19)}</span>
+                  </div>
+                  <div className="flex justify-between text-gray-700 dark:text-gray-300 pt-1 border-t border-gray-100 dark:border-white/5 text-[10px]">
+                    <span className="text-gray-400">Sync Drift:</span>
+                    <span className="text-cyan-500 font-bold">&lt; 1 ms</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="relative group hidden sm:flex items-center gap-2 cursor-pointer">

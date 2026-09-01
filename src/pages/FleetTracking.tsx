@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Search, Filter, MapPin, Navigation, Truck, Plus, Edit, Trash2, Save, RefreshCw } from 'lucide-react';
@@ -7,8 +8,25 @@ import { Vehicle } from '@/types';
 import Modal from '@/components/ui/Modal';
 
 export default function FleetTracking() {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const statusParam = searchParams.get('status') || searchParams.get('filter');
+
   const { vehicles, addVehicle, updateVehicle, deleteVehicle } = useData();
   const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState<string>(() => {
+    if (statusParam && statusParam.toUpperCase() === 'DELAYED') return 'DELAYED';
+    if (statusParam && statusParam.toUpperCase() === 'IN TRANSIT') return 'IN TRANSIT';
+    return 'ALL';
+  });
+
+  useEffect(() => {
+    if (statusParam) {
+      if (statusParam.toUpperCase() === 'DELAYED') setStatusFilter('DELAYED');
+      else if (statusParam.toUpperCase() === 'IN TRANSIT') setStatusFilter('IN TRANSIT');
+      else setStatusFilter('ALL');
+    }
+  }, [statusParam]);
   
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingVehicle, setEditingVehicle] = useState<Vehicle | null>(null);
@@ -23,11 +41,18 @@ export default function FleetTracking() {
   const delayedVehicles = vehicles.filter(v => v.status === 'DELAYED').length;
   const emergencyVehicles = vehicles.filter(v => v.status === 'HALTED').length;
 
-  const filteredVehicles = vehicles.filter(v => 
-    v.id.toLowerCase().includes(searchQuery.toLowerCase()) || 
-    v.cargo.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    v.status.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredVehicles = vehicles.filter(v => {
+    const query = searchQuery.toLowerCase();
+    const matchesSearch = 
+      v.id.toLowerCase().includes(query) || 
+      v.cargo.toLowerCase().includes(query) ||
+      v.origin.toLowerCase().includes(query) ||
+      v.destination.toLowerCase().includes(query) ||
+      v.status.toLowerCase().includes(query);
+
+    const matchesStatus = statusFilter === 'ALL' || v.status === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
 
   const openAdd = () => {
     setEditingVehicle(null);
@@ -78,13 +103,28 @@ export default function FleetTracking() {
     setSubmitting(true);
     setTimeout(() => {
       setSubmitting(false);
-      if(editingVehicle) {
-        updateVehicle(formData as Vehicle);
+      const vehiclePayload: Vehicle = {
+        id: formData.id || ('NER-V' + Math.floor(Math.random() * 900 + 100)),
+        cargo: formData.cargo || 'General Cargo',
+        cargoType: (formData.cargoType as any) || 'MEDICINES',
+        origin: formData.origin || 'Guwahati',
+        destination: formData.destination || 'Aizawl',
+        driver: formData.driver || 'Driver Team',
+        currentLocation: formData.currentLocation || [26.14, 91.73],
+        speed: formData.speed !== undefined ? formData.speed : 48,
+        eta: formData.eta || '4 hrs',
+        status: (formData.status as any) || 'IN TRANSIT',
+        risk: (formData.risk as any) || 'LOW',
+        progress: formData.progress !== undefined ? formData.progress : 15
+      };
+
+      if (editingVehicle) {
+        updateVehicle(vehiclePayload);
       } else {
-        addVehicle(formData as Vehicle);
+        addVehicle(vehiclePayload);
       }
       setIsModalOpen(false);
-    }, 800);
+    }, 400);
   };
 
   return (
@@ -116,22 +156,53 @@ export default function FleetTracking() {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card className="border-l-4 border-l-cyan-500 dark:bg-gray-50 dark:bg-[#0a0c14]/80 p-4" noPadding>
-          <div className="text-sm text-gray-500 font-bold uppercase tracking-wider mb-1">Total Fleet</div>
-          <div className="text-3xl font-bold text-gray-900 dark:text-white">{vehicles.length}</div>
-        </Card>
-        <Card className="border-l-4 border-l-emerald-500 dark:bg-gray-50 dark:bg-[#0a0c14]/80 p-4" noPadding>
-          <div className="text-sm text-gray-500 font-bold uppercase tracking-wider mb-1">In Transit</div>
-          <div className="text-3xl font-bold text-gray-900 dark:text-white">{activeVehicles}</div>
-        </Card>
-        <Card className="border-l-4 border-l-amber-500 dark:bg-gray-50 dark:bg-[#0a0c14]/80 p-4" noPadding>
-          <div className="text-sm text-gray-500 font-bold uppercase tracking-wider mb-1">Delayed</div>
-          <div className="text-3xl font-bold text-gray-900 dark:text-white">{delayedVehicles}</div>
-        </Card>
-        <Card className="border-l-4 border-l-red-500 dark:bg-gray-50 dark:bg-[#0a0c14]/80 p-4" noPadding>
-          <div className="text-sm text-gray-500 font-bold uppercase tracking-wider mb-1">Emergency</div>
-          <div className="text-3xl font-bold text-gray-900 dark:text-white">{emergencyVehicles}</div>
-        </Card>
+        <button 
+          onClick={() => setStatusFilter('ALL')} 
+          className={`text-left p-4 rounded-xl border transition-all cursor-pointer ${
+            statusFilter === 'ALL' 
+              ? 'bg-cyan-500/10 border-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.2)]' 
+              : 'bg-gray-50 dark:bg-[#0a0c14] border-gray-200 dark:border-white/5 hover:border-gray-300 dark:hover:border-white/20'
+          }`}
+        >
+          <div className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Total Fleet</div>
+          <div className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white font-mono">{vehicles.length}</div>
+        </button>
+
+        <button 
+          onClick={() => setStatusFilter('IN TRANSIT')} 
+          className={`text-left p-4 rounded-xl border transition-all cursor-pointer ${
+            statusFilter === 'IN TRANSIT' 
+              ? 'bg-emerald-500/10 border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.2)]' 
+              : 'bg-gray-50 dark:bg-[#0a0c14] border-gray-200 dark:border-white/5 hover:border-gray-300 dark:hover:border-white/20'
+          }`}
+        >
+          <div className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">In Transit</div>
+          <div className="text-2xl sm:text-3xl font-bold text-emerald-600 dark:text-emerald-400 font-mono">{activeVehicles}</div>
+        </button>
+
+        <button 
+          onClick={() => setStatusFilter('DELAYED')} 
+          className={`text-left p-4 rounded-xl border transition-all cursor-pointer ${
+            statusFilter === 'DELAYED' 
+              ? 'bg-amber-500/10 border-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.2)]' 
+              : 'bg-gray-50 dark:bg-[#0a0c14] border-gray-200 dark:border-white/5 hover:border-gray-300 dark:hover:border-white/20'
+          }`}
+        >
+          <div className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Delayed</div>
+          <div className="text-2xl sm:text-3xl font-bold text-amber-600 dark:text-amber-400 font-mono">{delayedVehicles}</div>
+        </button>
+
+        <button 
+          onClick={() => setStatusFilter('HALTED')} 
+          className={`text-left p-4 rounded-xl border transition-all cursor-pointer ${
+            statusFilter === 'HALTED' 
+              ? 'bg-red-500/10 border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.2)]' 
+              : 'bg-gray-50 dark:bg-[#0a0c14] border-gray-200 dark:border-white/5 hover:border-gray-300 dark:hover:border-white/20'
+          }`}
+        >
+          <div className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Emergency / Halted</div>
+          <div className="text-2xl sm:text-3xl font-bold text-red-600 dark:text-red-400 font-mono">{emergencyVehicles}</div>
+        </button>
       </div>
 
       <div className="bg-gray-50 dark:bg-[#0a0c14] border border-gray-300 dark:border-gray-200 dark:border-white/5 rounded-xl overflow-hidden shadow-2xl">

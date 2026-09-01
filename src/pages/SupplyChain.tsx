@@ -74,10 +74,22 @@ export default function SupplyChain() {
     setSubmitting(true);
     setTimeout(() => {
       setSubmitting(false);
-      if(editingShipment) updateShipment(formData as Shipment);
-      else addShipment(formData as Shipment);
+      const shipmentPayload: Shipment = {
+        id: formData.id || ('SHP-' + Math.floor(Math.random() * 9000 + 1000)),
+        cargo: formData.cargo || 'Essential Goods',
+        cargoType: formData.cargoType || 'OTHER',
+        origin: formData.origin || 'Guwahati',
+        destination: formData.destination || 'Aizawl',
+        priority: formData.priority || 'MEDIUM',
+        progress: formData.progress !== undefined ? formData.progress : 10,
+        eta: formData.eta || '6 hrs',
+        risk: formData.risk || 'LOW',
+        aiRecommendation: formData.aiRecommendation || 'Transit monitored via AI route intelligence.'
+      };
+      if (editingShipment) updateShipment(shipmentPayload);
+      else addShipment(shipmentPayload);
       setIsModalOpen(false);
-    }, 800);
+    }, 400);
   };
 
   return (

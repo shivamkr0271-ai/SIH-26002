@@ -5,7 +5,7 @@ export default function Modal({ isOpen, onClose, title, children }: { isOpen: bo
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+    <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
       <div className="bg-gray-50 dark:bg-[#0a0c14] border border-gray-300 dark:border-white/10 rounded-xl shadow-2xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh]">
         <div className="p-4 border-b border-gray-200 dark:border-white/5 flex justify-between items-center bg-gray-100 dark:bg-black/40">
           <h3 className="text-lg font-bold text-gray-900 dark:text-white tracking-wide">{title}</h3>

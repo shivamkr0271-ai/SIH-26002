@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { AlertTriangle, Clock, MapPin, Search, Filter, ShieldAlert, CheckCircle, Plus, RefreshCw } from 'lucide-react';
@@ -9,8 +9,22 @@ import { Incident } from '@/types';
 
 export default function Alerts() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const tabParam = searchParams.get('tab') || searchParams.get('severity');
+
   const { incidents, addIncident, updateIncident } = useData();
-  const [activeTab, setActiveTab] = useState<'all' | 'critical' | 'warning' | 'info'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'critical' | 'warning' | 'info'>(() => {
+    if (tabParam && ['critical', 'warning', 'info'].includes(tabParam.toLowerCase())) {
+      return tabParam.toLowerCase() as any;
+    }
+    return 'all';
+  });
+
+  useEffect(() => {
+    if (tabParam && ['critical', 'warning', 'info'].includes(tabParam.toLowerCase())) {
+      setActiveTab(tabParam.toLowerCase() as any);
+    }
+  }, [tabParam]);
   const [pulse, setPulse] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   
@@ -76,9 +90,22 @@ export default function Alerts() {
     setSubmitting(true);
     setTimeout(() => {
       setSubmitting(false);
-      addIncident(formData as Incident);
+      const incidentPayload: Incident = {
+        id: formData.id || ('INC-' + Math.floor(Math.random() * 900 + 100)),
+        title: formData.title || 'Road Disruption Alert',
+        type: formData.type || 'Other',
+        severity: formData.severity || 'WARNING',
+        status: formData.status || 'ACTIVE',
+        locationName: formData.locationName || 'NER Highway Corridor',
+        predictedImpact: formData.predictedImpact || 'Transit delay expected',
+        recommendedAction: formData.recommendedAction || 'Proceed with caution',
+        timestamp: formData.timestamp || new Date().toISOString(),
+        location: formData.location || [26.14, 91.73],
+        affectedRoute: formData.affectedRoute || 'Primary Corridor'
+      };
+      addIncident(incidentPayload);
       setIsModalOpen(false);
-    }, 800);
+    }, 400);
   };
 
   return (

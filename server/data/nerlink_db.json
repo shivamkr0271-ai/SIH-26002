@@ -1,0 +1,1925 @@
+{
+  "states": [
+    {
+      "id": "AS",
+      "name": "Assam",
+      "connectivityScore": 94,
+      "activeIncidents": 4,
+      "highRiskCorridors": 2,
+      "supplyStatus": "STABLE",
+      "weatherRisk": "LOW"
+    },
+    {
+      "id": "AR",
+      "name": "Arunachal Pradesh",
+      "connectivityScore": 69,
+      "activeIncidents": 12,
+      "highRiskCorridors": 8,
+      "supplyStatus": "AT RISK",
+      "weatherRisk": "HIGH"
+    },
+    {
+      "id": "MN",
+      "name": "Manipur",
+      "connectivityScore": 72,
+      "activeIncidents": 6,
+      "highRiskCorridors": 4,
+      "supplyStatus": "MODERATE",
+      "weatherRisk": "MODERATE"
+    },
+    {
+      "id": "ML",
+      "name": "Meghalaya",
+      "connectivityScore": 78,
+      "activeIncidents": 8,
+      "highRiskCorridors": 5,
+      "supplyStatus": "MODERATE",
+      "weatherRisk": "HIGH"
+    },
+    {
+      "id": "MZ",
+      "name": "Mizoram",
+      "connectivityScore": 64,
+      "activeIncidents": 7,
+      "highRiskCorridors": 6,
+      "supplyStatus": "AT RISK",
+      "weatherRisk": "MODERATE"
+    },
+    {
+      "id": "NL",
+      "name": "Nagaland",
+      "connectivityScore": 71,
+      "activeIncidents": 5,
+      "highRiskCorridors": 3,
+      "supplyStatus": "MODERATE",
+      "weatherRisk": "LOW"
+    },
+    {
+      "id": "TR",
+      "name": "Tripura",
+      "connectivityScore": 82,
+      "activeIncidents": 3,
+      "highRiskCorridors": 1,
+      "supplyStatus": "STABLE",
+      "weatherRisk": "LOW"
+    },
+    {
+      "id": "SK",
+      "name": "Sikkim",
+      "connectivityScore": 61,
+      "activeIncidents": 9,
+      "highRiskCorridors": 5,
+      "supplyStatus": "CRITICAL",
+      "weatherRisk": "EXTREME"
+    }
+  ],
+  "incidents": [
+    {
+      "id": "INC-4066",
+      "title": "Landslide: Jorhat Bypass Highway",
+      "type": "Landslide",
+      "severity": "WARNING",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Jorhat Bypass Highway",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Minor gravel movement on shoulder lane",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T21:52:44.070Z"
+    },
+    {
+      "id": "INC-1804",
+      "title": "Landslide: Jorhat North Sector",
+      "type": "Landslide",
+      "severity": "CRITICAL",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Jorhat North Sector",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Massive landslide blocking both transit lanes near railway crossing",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T21:52:28.867Z"
+    },
+    {
+      "id": "INC-3578",
+      "title": "Landslide: Sonapur Ghat Sector",
+      "type": "Landslide",
+      "severity": "CRITICAL",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Sonapur Ghat Sector",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Major boulder slide obstructing left carriageway. Heavy traffic slowing down.",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T21:52:27.053Z"
+    },
+    {
+      "id": "INC-2317",
+      "title": "Landslide: Jorhat Bypass Highway",
+      "type": "Landslide",
+      "severity": "WARNING",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Jorhat Bypass Highway",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Minor gravel movement on shoulder lane",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T21:34:02.337Z"
+    },
+    {
+      "id": "INC-5804",
+      "title": "Landslide: Jorhat North Sector",
+      "type": "Landslide",
+      "severity": "CRITICAL",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Jorhat North Sector",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Massive landslide blocking both transit lanes near railway crossing",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T21:33:39.217Z"
+    },
+    {
+      "id": "INC-1383",
+      "title": "Landslide: Sonapur Ghat Sector",
+      "type": "Landslide",
+      "severity": "CRITICAL",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Sonapur Ghat Sector",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Major boulder slide obstructing left carriageway. Heavy traffic slowing down.",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T21:33:36.904Z"
+    },
+    {
+      "id": "INC-0997",
+      "title": "Landslide: Jorhat Bypass Highway",
+      "type": "Landslide",
+      "severity": "WARNING",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Jorhat Bypass Highway",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Minor gravel movement on shoulder lane",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T21:22:31.015Z"
+    },
+    {
+      "id": "INC-2384",
+      "title": "Landslide: Jorhat North Sector",
+      "type": "Landslide",
+      "severity": "CRITICAL",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Jorhat North Sector",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Massive landslide blocking both transit lanes near railway crossing",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T21:22:16.190Z"
+    },
+    {
+      "id": "INC-8725",
+      "title": "Landslide: Sonapur Ghat Sector",
+      "type": "Landslide",
+      "severity": "CRITICAL",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Sonapur Ghat Sector",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Major boulder slide obstructing left carriageway. Heavy traffic slowing down.",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T21:22:14.328Z"
+    },
+    {
+      "id": "INC-6922",
+      "title": "Landslide: Sonapur Ghat Sector",
+      "type": "Landslide",
+      "severity": "CRITICAL",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Sonapur Ghat Sector",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Major boulder slide obstructing left carriageway. Heavy traffic slowing down.",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T21:22:04.807Z"
+    },
+    {
+      "id": "INC-7816",
+      "title": "Landslide: Sonapur Ghat Sector",
+      "type": "Landslide",
+      "severity": "CRITICAL",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Sonapur Ghat Sector",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Major boulder slide obstructing left carriageway. Heavy traffic slowing down.",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T21:21:35.230Z"
+    },
+    {
+      "id": "INC-8206",
+      "title": "Landslide: Jorhat North Sector",
+      "type": "Landslide",
+      "severity": "CRITICAL",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Jorhat North Sector",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Massive landslide blocking both transit lanes near railway crossing",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T20:51:55.843Z"
+    },
+    {
+      "id": "INC-8951",
+      "title": "Landslide: Jorhat Bypass Highway",
+      "type": "Landslide",
+      "severity": "WARNING",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Jorhat Bypass Highway",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Minor gravel movement on shoulder lane",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T20:49:28.967Z"
+    },
+    {
+      "id": "INC-1134",
+      "title": "Landslide: Jorhat North Sector",
+      "type": "Landslide",
+      "severity": "CRITICAL",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Jorhat North Sector",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Massive landslide blocking both transit lanes near railway crossing",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T20:49:01.813Z"
+    },
+    {
+      "id": "INC-2958",
+      "title": "Landslide: Jorhat North Sector",
+      "type": "Landslide",
+      "severity": "CRITICAL",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Jorhat North Sector",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Massive landslide blocking both transit lanes near railway crossing",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T20:47:49.530Z"
+    },
+    {
+      "id": "INC-8706",
+      "title": "Landslide: Jorhat Bypass Highway",
+      "type": "Landslide",
+      "severity": "WARNING",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Jorhat Bypass Highway",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Minor gravel movement on shoulder lane",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T20:21:28.725Z"
+    },
+    {
+      "id": "INC-6517",
+      "title": "Landslide: Jorhat Bypass Highway",
+      "type": "Landslide",
+      "severity": "WARNING",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Jorhat Bypass Highway",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Minor gravel movement on shoulder lane",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T19:25:16.521Z"
+    },
+    {
+      "id": "INC-3345",
+      "title": "Landslide: Jorhat Bypass Highway",
+      "type": "Landslide",
+      "severity": "WARNING",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Jorhat Bypass Highway",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Minor gravel movement on shoulder lane",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T19:21:43.354Z"
+    },
+    {
+      "id": "INC-1196",
+      "title": "Landslide: Jorhat Bypass Highway",
+      "type": "Landslide",
+      "severity": "WARNING",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Jorhat Bypass Highway",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Minor gravel movement on shoulder lane",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T18:38:21.201Z"
+    },
+    {
+      "id": "INC-4851",
+      "title": "Landslide: Jorhat Bypass Highway",
+      "type": "Landslide",
+      "severity": "WARNING",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Jorhat Bypass Highway",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Minor gravel movement on shoulder lane",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T18:14:14.870Z"
+    },
+    {
+      "id": "INC-1967",
+      "title": "Landslide: Jorhat Bypass Highway",
+      "type": "Landslide",
+      "severity": "WARNING",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Jorhat Bypass Highway",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Minor gravel movement on shoulder lane",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T17:51:41.985Z"
+    },
+    {
+      "id": "INC-6307",
+      "title": "Landslide: Jorhat Bypass Highway",
+      "type": "Landslide",
+      "severity": "WARNING",
+      "status": "ACTIVE",
+      "location": [
+        25.5,
+        91.5
+      ],
+      "locationName": "Jorhat Bypass Highway",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Minor gravel movement on shoulder lane",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T17:36:36.329Z"
+    },
+    {
+      "id": "INC-01",
+      "title": "Road Damage: Jorhat Link Road",
+      "type": "Road Damage",
+      "severity": "INFO",
+      "status": "ACTIVE",
+      "location": [
+        26.75,
+        94.2
+      ],
+      "locationName": "Jorhat Link Road",
+      "affectedRoute": "Identified via Field Report",
+      "predictedImpact": "Pothole cluster causing slowdown",
+      "recommendedAction": "Deploy assessment team; coordinate local traffic diversion.",
+      "timestamp": "2026-08-28T17:35:34.258Z"
+    },
+    {
+      "id": "INC-TEST-88",
+      "title": "Flash Flood Warning at NH-29",
+      "type": "Flood",
+      "severity": "WARNING",
+      "status": "RESOLVED",
+      "location": [
+        25.67,
+        94.1
+      ],
+      "locationName": "Kohima Bypass",
+      "affectedRoute": "Dimapur to Kohima Corridor",
+      "predictedImpact": "Traffic moving with 30 min delay",
+      "recommendedAction": "Reroute critical traffic if situation escalates.",
+      "timestamp": "2026-08-28T17:35:34.203Z"
+    },
+    {
+      "id": "INC-001",
+      "title": "Major Landslide on NH-10",
+      "type": "Landslide",
+      "severity": "CRITICAL",
+      "status": "ACTIVE",
+      "location": [
+        27.05,
+        88.52
+      ],
+      "locationName": "NH-10 near Melli",
+      "affectedRoute": "Siliguri to Gangtok Corridor",
+      "predictedImpact": "Complete blockade expected for 12+ hours. 48 logistics vehicles halted.",
+      "recommendedAction": "Reroute critical medical supplies via helicopter. Divert non-essential traffic to Lava route.",
+      "timestamp": "2026-08-28T15:37:41.134Z"
+    },
+    {
+      "id": "INC-002",
+      "title": "Severe Waterlogging",
+      "type": "Flood",
+      "severity": "WARNING",
+      "status": "ACTIVE",
+      "location": [
+        24.83,
+        92.77
+      ],
+      "locationName": "NH-37 bypass, Silchar",
+      "affectedRoute": "Guwahati - Silchar Route",
+      "predictedImpact": "Average delay of 2 hours for heavy vehicles. Light vehicles cannot pass.",
+      "recommendedAction": "Deploy water pumps. Issue advisory for high-clearance vehicles only.",
+      "timestamp": "2026-08-28T14:22:41.141Z"
+    },
+    {
+      "id": "INC-003",
+      "title": "Bridge Structural Stress Detected",
+      "type": "Bridge Damage",
+      "severity": "WARNING",
+      "status": "UNDER_REVIEW",
+      "location": [
+        25.56,
+        91.89
+      ],
+      "locationName": "Umiam Lake Bridge",
+      "affectedRoute": "Guwahati - Shillong Highway",
+      "predictedImpact": "Potential load restriction. Heavy multiaxle vehicles may be restricted.",
+      "recommendedAction": "Immediate engineering inspection required. Prepare alternate traffic plan.",
+      "timestamp": "2026-08-28T12:22:41.141Z"
+    },
+    {
+      "id": "INC-004",
+      "title": "Routine Road Maintenance",
+      "type": "Road Damage",
+      "severity": "INFO",
+      "status": "ACTIVE",
+      "location": [
+        26.14,
+        91.73
+      ],
+      "locationName": "Jalukbari Flyover Approach",
+      "affectedRoute": "City Transit",
+      "predictedImpact": "Minor traffic slowdown. 15 minute delay.",
+      "recommendedAction": "Monitor traffic flow.",
+      "timestamp": "2026-08-28T04:22:41.141Z"
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "NER-DEMO-99",
+      "cargo": "Emergency Blood Plasma & Vaccines",
+      "cargoType": "MEDICINES",
+      "origin": "Guwahati",
+      "destination": "Aizawl",
+      "driver": "Capt. R. Borah",
+      "currentLocation": [
+        25.8,
+        92.1
+      ],
+      "speed": 42,
+      "eta": "3 hrs 40 mins",
+      "status": "IN TRANSIT",
+      "risk": "LOW",
+      "progress": 60
+    },
+    {
+      "id": "NER-MED-204",
+      "cargo": "Essential Medicines",
+      "cargoType": "MEDICINES",
+      "origin": "Guwahati",
+      "destination": "Aizawl",
+      "driver": "Rahul Das",
+      "currentLocation": [
+        24.3,
+        92.8
+      ],
+      "speed": 42,
+      "eta": "2026-08-28T21:22:41.141Z",
+      "status": "IN TRANSIT",
+      "risk": "MODERATE",
+      "progress": 65
+    },
+    {
+      "id": "NER-FOOD-117",
+      "cargo": "Rice & Grains",
+      "cargoType": "FOOD",
+      "origin": "Silchar",
+      "destination": "Imphal",
+      "driver": "T. Singh",
+      "currentLocation": [
+        24.8,
+        93.5
+      ],
+      "speed": 35,
+      "eta": "2026-08-28T19:22:41.141Z",
+      "status": "DELAYED",
+      "risk": "HIGH",
+      "progress": 40
+    },
+    {
+      "id": "NER-CON-342",
+      "cargo": "Cement & Steel",
+      "cargoType": "CONSTRUCTION MATERIAL",
+      "origin": "Guwahati",
+      "destination": "Itanagar",
+      "driver": "Karma Bhutia",
+      "currentLocation": [
+        26.8,
+        93.2
+      ],
+      "speed": 55,
+      "eta": "2026-08-28T20:52:41.141Z",
+      "status": "IN TRANSIT",
+      "risk": "LOW",
+      "progress": 75
+    },
+    {
+      "id": "NER-EMG-001",
+      "cargo": "Water Purifiers & Tents",
+      "cargoType": "EMERGENCY EQUIPMENT",
+      "origin": "Guwahati",
+      "destination": "Gangtok",
+      "driver": "P. Sharma",
+      "currentLocation": [
+        26.7,
+        88.4
+      ],
+      "speed": 0,
+      "eta": "2026-08-29T00:22:41.141Z",
+      "status": "HALTED",
+      "risk": "CRITICAL",
+      "progress": 55
+    },
+    {
+      "id": "NER-FUEL-88",
+      "cargo": "Diesel",
+      "cargoType": "FUEL",
+      "origin": "Digboi",
+      "destination": "Kohima",
+      "driver": "S. Konyak",
+      "currentLocation": [
+        26.5,
+        94.2
+      ],
+      "speed": 48,
+      "eta": "2026-08-28T18:52:41.141Z",
+      "status": "IN TRANSIT",
+      "risk": "LOW",
+      "progress": 82
+    }
+  ],
+  "shipments": [
+    {
+      "id": "SHP-1024",
+      "cargo": "Essential Medicines (Insulin)",
+      "cargoType": "MEDICINES",
+      "origin": "Guwahati",
+      "destination": "Tawang",
+      "priority": "CRITICAL",
+      "progress": 68,
+      "eta": "7h 22m",
+      "risk": "HIGH",
+      "aiRecommendation": "Consider rerouting through the alternate corridor due to increasing landslide probability near Bomdila."
+    },
+    {
+      "id": "SHP-1025",
+      "cargo": "Emergency Rations",
+      "cargoType": "FOOD",
+      "origin": "Siliguri",
+      "destination": "Gangtok",
+      "priority": "HIGH",
+      "progress": 20,
+      "eta": "Unknown",
+      "risk": "CRITICAL",
+      "aiRecommendation": "NH-10 completely blocked. Hold shipment at transit hub or coordinate for air-drop if situation deteriorates."
+    },
+    {
+      "id": "SHP-1026",
+      "cargo": "Construction Material (Pipes)",
+      "cargoType": "CONSTRUCTION",
+      "origin": "Guwahati",
+      "destination": "Shillong",
+      "priority": "LOW",
+      "progress": 90,
+      "eta": "1h 15m",
+      "risk": "LOW",
+      "aiRecommendation": "Route is clear. No changes recommended."
+    },
+    {
+      "id": "SHP-1027",
+      "cargo": "Aviation Turbine Fuel",
+      "cargoType": "FUEL",
+      "origin": "Numaligarh",
+      "destination": "Imphal",
+      "priority": "HIGH",
+      "progress": 45,
+      "eta": "6h 40m",
+      "risk": "MODERATE",
+      "aiRecommendation": "Heavy rainfall expected on route in 3 hours. Recommend drivers maintain cautious speed."
+    }
+  ],
+  "fieldReports": [
+    {
+      "id": "FR-1804",
+      "incidentType": "Landslide",
+      "locationName": "Jorhat North Sector",
+      "description": "Massive landslide blocking both transit lanes near railway crossing",
+      "severity": "CRITICAL",
+      "officerName": "Captain Hazarika",
+      "status": "SYNCED",
+      "timestamp": "2026-08-28T21:52:28.867Z"
+    },
+    {
+      "id": "FR-3578",
+      "incidentType": "Landslide",
+      "locationName": "Sonapur Ghat Sector",
+      "description": "Major boulder slide obstructing left carriageway. Heavy traffic slowing down.",
+      "severity": "CRITICAL",
+      "officerName": "Inspector Sarma",
+      "status": "SYNCED",
+      "timestamp": "2026-08-28T21:52:27.053Z"
+    },
+    {
+      "id": "FR-5804",
+      "incidentType": "Landslide",
+      "locationName": "Jorhat North Sector",
+      "description": "Massive landslide blocking both transit lanes near railway crossing",
+      "severity": "CRITICAL",
+      "officerName": "Captain Hazarika",
+      "status": "SYNCED",
+      "timestamp": "2026-08-28T21:33:39.217Z"
+    },
+    {
+      "id": "FR-1383",
+      "incidentType": "Landslide",
+      "locationName": "Sonapur Ghat Sector",
+      "description": "Major boulder slide obstructing left carriageway. Heavy traffic slowing down.",
+      "severity": "CRITICAL",
+      "officerName": "Inspector Sarma",
+      "status": "SYNCED",
+      "timestamp": "2026-08-28T21:33:36.904Z"
+    },
+    {
+      "id": "FR-2384",
+      "incidentType": "Landslide",
+      "locationName": "Jorhat North Sector",
+      "description": "Massive landslide blocking both transit lanes near railway crossing",
+      "severity": "CRITICAL",
+      "officerName": "Captain Hazarika",
+      "status": "SYNCED",
+      "timestamp": "2026-08-28T21:22:16.190Z"
+    },
+    {
+      "id": "FR-8725",
+      "incidentType": "Landslide",
+      "locationName": "Sonapur Ghat Sector",
+      "description": "Major boulder slide obstructing left carriageway. Heavy traffic slowing down.",
+      "severity": "CRITICAL",
+      "officerName": "Inspector Sarma",
+      "status": "SYNCED",
+      "timestamp": "2026-08-28T21:22:14.328Z"
+    },
+    {
+      "id": "FR-6922",
+      "incidentType": "Landslide",
+      "locationName": "Sonapur Ghat Sector",
+      "description": "Major boulder slide obstructing left carriageway. Heavy traffic slowing down.",
+      "severity": "CRITICAL",
+      "officerName": "Inspector Sarma",
+      "status": "SYNCED",
+      "timestamp": "2026-08-28T21:22:04.807Z"
+    },
+    {
+      "id": "FR-7816",
+      "incidentType": "Landslide",
+      "locationName": "Sonapur Ghat Sector",
+      "description": "Major boulder slide obstructing left carriageway. Heavy traffic slowing down.",
+      "severity": "CRITICAL",
+      "officerName": "Inspector Sarma",
+      "status": "SYNCED",
+      "timestamp": "2026-08-28T21:21:35.230Z"
+    },
+    {
+      "id": "FR-8206",
+      "incidentType": "Landslide",
+      "locationName": "Jorhat North Sector",
+      "description": "Massive landslide blocking both transit lanes near railway crossing",
+      "severity": "CRITICAL",
+      "officerName": "Captain Hazarika",
+      "status": "SYNCED",
+      "timestamp": "2026-08-28T20:51:55.843Z"
+    },
+    {
+      "id": "FR-1134",
+      "incidentType": "Landslide",
+      "locationName": "Jorhat North Sector",
+      "description": "Massive landslide blocking both transit lanes near railway crossing",
+      "severity": "CRITICAL",
+      "officerName": "Captain Hazarika",
+      "status": "SYNCED",
+      "timestamp": "2026-08-28T20:49:01.813Z"
+    },
+    {
+      "id": "FR-2958",
+      "incidentType": "Landslide",
+      "locationName": "Jorhat North Sector",
+      "description": "Massive landslide blocking both transit lanes near railway crossing",
+      "severity": "CRITICAL",
+      "officerName": "Captain Hazarika",
+      "status": "SYNCED",
+      "timestamp": "2026-08-28T20:47:49.530Z"
+    },
+    {
+      "id": "FR-OFFLINE-01",
+      "incidentType": "Road Damage",
+      "locationName": "Jorhat Link Road",
+      "description": "Pothole cluster causing slowdown",
+      "severity": "INFO",
+      "officerName": "Inspector Phukan",
+      "status": "SYNCED",
+      "latitude": 26.75,
+      "longitude": 94.2
+    },
+    {
+      "id": "FR-8892",
+      "incidentType": "Landslide",
+      "locationName": "NH-10 near Melli",
+      "description": "Massive mudslide blocking both lanes. Immediate clearing required. Approximately 50m of road covered.",
+      "severity": "CRITICAL",
+      "timestamp": "2026-08-28T15:22:41.141Z",
+      "officerName": "Inspector D. Lepcha",
+      "status": "SYNCED",
+      "latitude": 27.05,
+      "longitude": 88.52
+    },
+    {
+      "id": "FR-8893",
+      "incidentType": "Flood",
+      "locationName": "Sonapur",
+      "description": "Water flowing over the highway. Depth approx 1.5 ft. Light vehicles struggling.",
+      "severity": "WARNING",
+      "timestamp": "2026-08-28T14:22:41.141Z",
+      "officerName": "Officer B. Baruah",
+      "status": "SYNCED",
+      "latitude": 26.12,
+      "longitude": 91.98
+    },
+    {
+      "id": "FR-8894",
+      "incidentType": "Bridge Damage",
+      "locationName": "Barak River Bridge",
+      "description": "Visible crack on expansion joint. Sent photos for engineering review.",
+      "severity": "WARNING",
+      "timestamp": "2026-08-28T15:52:41.141Z",
+      "officerName": "Engineer S. Laskar",
+      "status": "WAITING",
+      "latitude": 24.81,
+      "longitude": 92.8
+    }
+  ],
+  "activities": [
+    {
+      "id": "act-ofba5a6",
+      "action": "Field report FR-TEST-1787953964066 deleted",
+      "time": "2026-08-28T21:52:44.110Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1787953964066"
+    },
+    {
+      "id": "act-zhy85n7",
+      "action": "Incident alert INC-4066 declared: Landslide: Jorhat Bypass Highway",
+      "time": "2026-08-28T21:52:44.070Z",
+      "type": "incident",
+      "relatedId": "INC-4066"
+    },
+    {
+      "id": "act-gdqynsw",
+      "action": "Field report FR-TEST-1787953964066 submitted by Patrol unit 4",
+      "time": "2026-08-28T21:52:44.070Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1787953964066"
+    },
+    {
+      "id": "act-8aunypn",
+      "action": "Vehicle TEST-VEH-1787953964022 decommissioned",
+      "time": "2026-08-28T21:52:44.054Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1787953964022"
+    },
+    {
+      "id": "act-9t4yv0n",
+      "action": "Vehicle TEST-VEH-1787953964022 registered",
+      "time": "2026-08-28T21:52:44.028Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1787953964022"
+    },
+    {
+      "id": "act-zicfsgi",
+      "action": "Incident alert INC-1804 declared: Landslide: Jorhat North Sector",
+      "time": "2026-08-28T21:52:28.868Z",
+      "type": "incident",
+      "relatedId": "INC-1804"
+    },
+    {
+      "id": "act-2hvg7bp",
+      "action": "Field report FR-1804 submitted by Captain Hazarika",
+      "time": "2026-08-28T21:52:28.867Z",
+      "type": "report",
+      "relatedId": "FR-1804"
+    },
+    {
+      "id": "act-b80a8rr",
+      "action": "Incident alert INC-3578 declared: Landslide: Sonapur Ghat Sector",
+      "time": "2026-08-28T21:52:27.054Z",
+      "type": "incident",
+      "relatedId": "INC-3578"
+    },
+    {
+      "id": "act-hsn6j6i",
+      "action": "Field report FR-3578 submitted by Inspector Sarma",
+      "time": "2026-08-28T21:52:27.053Z",
+      "type": "report",
+      "relatedId": "FR-3578"
+    },
+    {
+      "id": "act-cqli7gt",
+      "action": "Vehicle NER-DEMO-99 registered",
+      "time": "2026-08-28T21:52:27.014Z",
+      "type": "vehicle",
+      "relatedId": "NER-DEMO-99"
+    },
+    {
+      "id": "act-jejzw2p",
+      "action": "Field report FR-TEST-1787952842317 deleted",
+      "time": "2026-08-28T21:34:02.366Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1787952842317"
+    },
+    {
+      "id": "act-ign1l5v",
+      "action": "Incident alert INC-2317 declared: Landslide: Jorhat Bypass Highway",
+      "time": "2026-08-28T21:34:02.338Z",
+      "type": "incident",
+      "relatedId": "INC-2317"
+    },
+    {
+      "id": "act-zgvyntd",
+      "action": "Field report FR-TEST-1787952842317 submitted by Patrol unit 4",
+      "time": "2026-08-28T21:34:02.337Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1787952842317"
+    },
+    {
+      "id": "act-6ggo59l",
+      "action": "Vehicle TEST-VEH-1787952842240 decommissioned",
+      "time": "2026-08-28T21:34:02.305Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1787952842240"
+    },
+    {
+      "id": "act-66ud7jj",
+      "action": "Vehicle TEST-VEH-1787952842240 registered",
+      "time": "2026-08-28T21:34:02.259Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1787952842240"
+    },
+    {
+      "id": "act-sugi284",
+      "action": "Incident alert INC-5804 declared: Landslide: Jorhat North Sector",
+      "time": "2026-08-28T21:33:39.218Z",
+      "type": "incident",
+      "relatedId": "INC-5804"
+    },
+    {
+      "id": "act-toz5qxq",
+      "action": "Field report FR-5804 submitted by Captain Hazarika",
+      "time": "2026-08-28T21:33:39.217Z",
+      "type": "report",
+      "relatedId": "FR-5804"
+    },
+    {
+      "id": "act-r9qt4oy",
+      "action": "Incident alert INC-1383 declared: Landslide: Sonapur Ghat Sector",
+      "time": "2026-08-28T21:33:36.905Z",
+      "type": "incident",
+      "relatedId": "INC-1383"
+    },
+    {
+      "id": "act-n9g2vqq",
+      "action": "Field report FR-1383 submitted by Inspector Sarma",
+      "time": "2026-08-28T21:33:36.904Z",
+      "type": "report",
+      "relatedId": "FR-1383"
+    },
+    {
+      "id": "act-didjzrs",
+      "action": "Vehicle NER-DEMO-99 registered",
+      "time": "2026-08-28T21:33:36.883Z",
+      "type": "vehicle",
+      "relatedId": "NER-DEMO-99"
+    },
+    {
+      "id": "act-kve2cn6",
+      "action": "Field report FR-TEST-1787952150997 deleted",
+      "time": "2026-08-28T21:22:31.048Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1787952150997"
+    },
+    {
+      "id": "act-rfr8fjy",
+      "action": "Incident alert INC-0997 declared: Landslide: Jorhat Bypass Highway",
+      "time": "2026-08-28T21:22:31.015Z",
+      "type": "incident",
+      "relatedId": "INC-0997"
+    },
+    {
+      "id": "act-akuimua",
+      "action": "Field report FR-TEST-1787952150997 submitted by Patrol unit 4",
+      "time": "2026-08-28T21:22:31.015Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1787952150997"
+    },
+    {
+      "id": "act-j5zhp1y",
+      "action": "Vehicle TEST-VEH-1787952150944 decommissioned",
+      "time": "2026-08-28T21:22:30.986Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1787952150944"
+    },
+    {
+      "id": "act-g21rozn",
+      "action": "Vehicle TEST-VEH-1787952150944 registered",
+      "time": "2026-08-28T21:22:30.954Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1787952150944"
+    },
+    {
+      "id": "act-mpmedxo",
+      "action": "Incident alert INC-2384 declared: Landslide: Jorhat North Sector",
+      "time": "2026-08-28T21:22:16.190Z",
+      "type": "incident",
+      "relatedId": "INC-2384"
+    },
+    {
+      "id": "act-qk3f2vo",
+      "action": "Field report FR-2384 submitted by Captain Hazarika",
+      "time": "2026-08-28T21:22:16.190Z",
+      "type": "report",
+      "relatedId": "FR-2384"
+    },
+    {
+      "id": "act-ltg413n",
+      "action": "Incident alert INC-8725 declared: Landslide: Sonapur Ghat Sector",
+      "time": "2026-08-28T21:22:14.328Z",
+      "type": "incident",
+      "relatedId": "INC-8725"
+    },
+    {
+      "id": "act-ulcdceo",
+      "action": "Field report FR-8725 submitted by Inspector Sarma",
+      "time": "2026-08-28T21:22:14.328Z",
+      "type": "report",
+      "relatedId": "FR-8725"
+    },
+    {
+      "id": "act-ekcsz79",
+      "action": "Vehicle NER-DEMO-99 registered",
+      "time": "2026-08-28T21:22:14.302Z",
+      "type": "vehicle",
+      "relatedId": "NER-DEMO-99"
+    },
+    {
+      "id": "act-5rx065c",
+      "action": "Incident alert INC-6922 declared: Landslide: Sonapur Ghat Sector",
+      "time": "2026-08-28T21:22:04.807Z",
+      "type": "incident",
+      "relatedId": "INC-6922"
+    },
+    {
+      "id": "act-reh66qj",
+      "action": "Field report FR-6922 submitted by Inspector Sarma",
+      "time": "2026-08-28T21:22:04.807Z",
+      "type": "report",
+      "relatedId": "FR-6922"
+    },
+    {
+      "id": "act-afxyz11",
+      "action": "Vehicle NER-DEMO-99 registered",
+      "time": "2026-08-28T21:22:04.785Z",
+      "type": "vehicle",
+      "relatedId": "NER-DEMO-99"
+    },
+    {
+      "id": "act-ljwlrab",
+      "action": "Incident alert INC-7816 declared: Landslide: Sonapur Ghat Sector",
+      "time": "2026-08-28T21:21:35.232Z",
+      "type": "incident",
+      "relatedId": "INC-7816"
+    },
+    {
+      "id": "act-mqkz1ch",
+      "action": "Field report FR-7816 submitted by Inspector Sarma",
+      "time": "2026-08-28T21:21:35.231Z",
+      "type": "report",
+      "relatedId": "FR-7816"
+    },
+    {
+      "id": "act-31al4dm",
+      "action": "Vehicle NER-DEMO-99 registered",
+      "time": "2026-08-28T21:21:35.216Z",
+      "type": "vehicle",
+      "relatedId": "NER-DEMO-99"
+    },
+    {
+      "id": "act-wbobdf3",
+      "action": "Incident alert INC-8206 declared: Landslide: Jorhat North Sector",
+      "time": "2026-08-28T20:51:55.847Z",
+      "type": "incident",
+      "relatedId": "INC-8206"
+    },
+    {
+      "id": "act-toutint",
+      "action": "Field report FR-8206 submitted by Captain Hazarika",
+      "time": "2026-08-28T20:51:55.844Z",
+      "type": "report",
+      "relatedId": "FR-8206"
+    },
+    {
+      "id": "act-o39ptm2",
+      "action": "Field report FR-TEST-1787950168951 deleted",
+      "time": "2026-08-28T20:49:29.003Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1787950168951"
+    },
+    {
+      "id": "act-2o1793s",
+      "action": "Incident alert INC-8951 declared: Landslide: Jorhat Bypass Highway",
+      "time": "2026-08-28T20:49:28.968Z",
+      "type": "incident",
+      "relatedId": "INC-8951"
+    },
+    {
+      "id": "act-7ixj54n",
+      "action": "Field report FR-TEST-1787950168951 submitted by Patrol unit 4",
+      "time": "2026-08-28T20:49:28.967Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1787950168951"
+    },
+    {
+      "id": "act-9h444k4",
+      "action": "Vehicle TEST-VEH-1787950168904 decommissioned",
+      "time": "2026-08-28T20:49:28.941Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1787950168904"
+    },
+    {
+      "id": "act-w5mdxsy",
+      "action": "Vehicle TEST-VEH-1787950168904 registered",
+      "time": "2026-08-28T20:49:28.908Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1787950168904"
+    },
+    {
+      "id": "act-rgnyj9l",
+      "action": "Incident alert INC-1134 declared: Landslide: Jorhat North Sector",
+      "time": "2026-08-28T20:49:01.815Z",
+      "type": "incident",
+      "relatedId": "INC-1134"
+    },
+    {
+      "id": "act-4d1zr8n",
+      "action": "Field report FR-1134 submitted by Captain Hazarika",
+      "time": "2026-08-28T20:49:01.814Z",
+      "type": "report",
+      "relatedId": "FR-1134"
+    },
+    {
+      "id": "act-rnlf16r",
+      "action": "Incident alert INC-2958 declared: Landslide: Jorhat North Sector",
+      "time": "2026-08-28T20:47:49.531Z",
+      "type": "incident",
+      "relatedId": "INC-2958"
+    },
+    {
+      "id": "act-9o8g2ng",
+      "action": "Field report FR-2958 submitted by Captain Hazarika",
+      "time": "2026-08-28T20:47:49.530Z",
+      "type": "report",
+      "relatedId": "FR-2958"
+    },
+    {
+      "id": "act-x1vzkpc",
+      "action": "Field report FR-TEST-1787948488706 deleted",
+      "time": "2026-08-28T20:21:28.786Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1787948488706"
+    },
+    {
+      "id": "act-vkyvelh",
+      "action": "Incident alert INC-8706 declared: Landslide: Jorhat Bypass Highway",
+      "time": "2026-08-28T20:21:28.725Z",
+      "type": "incident",
+      "relatedId": "INC-8706"
+    },
+    {
+      "id": "act-f8tv2m8",
+      "action": "Field report FR-TEST-1787948488706 submitted by Patrol unit 4",
+      "time": "2026-08-28T20:21:28.725Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1787948488706"
+    },
+    {
+      "id": "act-ufnr1et",
+      "action": "Vehicle TEST-VEH-1787948488639 decommissioned",
+      "time": "2026-08-28T20:21:28.695Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1787948488639"
+    },
+    {
+      "id": "act-m90u5h8",
+      "action": "Vehicle TEST-VEH-1787948488639 registered",
+      "time": "2026-08-28T20:21:28.649Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1787948488639"
+    },
+    {
+      "id": "act-devsp11",
+      "action": "Field report FR-TEST-1787945116517 deleted",
+      "time": "2026-08-28T19:25:16.551Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1787945116517"
+    },
+    {
+      "id": "act-hy70das",
+      "action": "Incident alert INC-6517 declared: Landslide: Jorhat Bypass Highway",
+      "time": "2026-08-28T19:25:16.522Z",
+      "type": "incident",
+      "relatedId": "INC-6517"
+    },
+    {
+      "id": "act-dq9ozuk",
+      "action": "Field report FR-TEST-1787945116517 submitted by Patrol unit 4",
+      "time": "2026-08-28T19:25:16.521Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1787945116517"
+    },
+    {
+      "id": "act-2vxv21c",
+      "action": "Vehicle TEST-VEH-1787945116468 decommissioned",
+      "time": "2026-08-28T19:25:16.504Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1787945116468"
+    },
+    {
+      "id": "act-zxkvb8j",
+      "action": "Vehicle TEST-VEH-1787945116468 registered",
+      "time": "2026-08-28T19:25:16.476Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1787945116468"
+    },
+    {
+      "id": "act-ghbtmn9",
+      "action": "Field report FR-TEST-1787944903345 deleted",
+      "time": "2026-08-28T19:21:43.410Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1787944903345"
+    },
+    {
+      "id": "act-pi3dn2n",
+      "action": "Incident alert INC-3345 declared: Landslide: Jorhat Bypass Highway",
+      "time": "2026-08-28T19:21:43.355Z",
+      "type": "incident",
+      "relatedId": "INC-3345"
+    },
+    {
+      "id": "act-gvr2994",
+      "action": "Field report FR-TEST-1787944903345 submitted by Patrol unit 4",
+      "time": "2026-08-28T19:21:43.354Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1787944903345"
+    },
+    {
+      "id": "act-vsulma3",
+      "action": "Vehicle TEST-VEH-1787944903258 decommissioned",
+      "time": "2026-08-28T19:21:43.318Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1787944903258"
+    },
+    {
+      "id": "act-wnahte7",
+      "action": "Vehicle TEST-VEH-1787944903258 registered",
+      "time": "2026-08-28T19:21:43.266Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1787944903258"
+    },
+    {
+      "id": "act-ge4wtdz",
+      "action": "Field report FR-TEST-1787942301196 deleted",
+      "time": "2026-08-28T18:38:21.245Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1787942301196"
+    },
+    {
+      "id": "act-q5zxrk0",
+      "action": "Incident alert INC-1196 declared: Landslide: Jorhat Bypass Highway",
+      "time": "2026-08-28T18:38:21.202Z",
+      "type": "incident",
+      "relatedId": "INC-1196"
+    },
+    {
+      "id": "act-75jx6o2",
+      "action": "Field report FR-TEST-1787942301196 submitted by Patrol unit 4",
+      "time": "2026-08-28T18:38:21.202Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1787942301196"
+    },
+    {
+      "id": "act-kh1ndw9",
+      "action": "Vehicle TEST-VEH-1787942301130 decommissioned",
+      "time": "2026-08-28T18:38:21.181Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1787942301130"
+    },
+    {
+      "id": "act-6akgh3i",
+      "action": "Vehicle TEST-VEH-1787942301130 registered",
+      "time": "2026-08-28T18:38:21.145Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1787942301130"
+    },
+    {
+      "id": "act-m37lybf",
+      "action": "Field report FR-TEST-1787940854851 deleted",
+      "time": "2026-08-28T18:14:14.895Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1787940854851"
+    },
+    {
+      "id": "act-rvcqzpk",
+      "action": "Incident alert INC-4851 declared: Landslide: Jorhat Bypass Highway",
+      "time": "2026-08-28T18:14:14.871Z",
+      "type": "incident",
+      "relatedId": "INC-4851"
+    },
+    {
+      "id": "act-if2fbyk",
+      "action": "Field report FR-TEST-1787940854851 submitted by Patrol unit 4",
+      "time": "2026-08-28T18:14:14.871Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1787940854851"
+    },
+    {
+      "id": "act-jbmac82",
+      "action": "Vehicle TEST-VEH-1787940854796 decommissioned",
+      "time": "2026-08-28T18:14:14.836Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1787940854796"
+    },
+    {
+      "id": "act-ic459ha",
+      "action": "Vehicle TEST-VEH-1787940854796 registered",
+      "time": "2026-08-28T18:14:14.809Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1787940854796"
+    },
+    {
+      "id": "act-mhat18j",
+      "action": "Field report FR-TEST-1787939501967 deleted",
+      "time": "2026-08-28T17:51:42.043Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1787939501967"
+    },
+    {
+      "id": "act-3uepd22",
+      "action": "Incident alert INC-1967 declared: Landslide: Jorhat Bypass Highway",
+      "time": "2026-08-28T17:51:41.986Z",
+      "type": "incident",
+      "relatedId": "INC-1967"
+    },
+    {
+      "id": "act-sy0du8a",
+      "action": "Field report FR-TEST-1787939501967 submitted by Patrol unit 4",
+      "time": "2026-08-28T17:51:41.986Z",
+      "type": "report",
+      "relatedId": "FR-TEST-1787939501967"
+    },
+    {
+      "id": "act-x0r4ar7",
+      "action": "Vehicle TEST-VEH-1787939501890 decommissioned",
+      "time": "2026-08-28T17:51:41.937Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1787939501890"
+    },
+    {
+      "id": "act-mxaf048",
+      "action": "Vehicle TEST-VEH-1787939501890 registered",
+      "time": "2026-08-28T17:51:41.902Z",
+      "type": "vehicle",
+      "relatedId": "TEST-VEH-1787939501890"
+    },
+    {
+      "id": "act-zkve2ji",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:20.068Z",
+      "type": "route"
+    },
+    {
+      "id": "act-3lq06ul",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:19.545Z",
+      "type": "route"
+    },
+    {
+      "id": "act-v92y93y",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:17.908Z",
+      "type": "route"
+    },
+    {
+      "id": "act-fuyxrrl",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:17.857Z",
+      "type": "route"
+    },
+    {
+      "id": "act-vseo2i8",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:16.288Z",
+      "type": "route"
+    },
+    {
+      "id": "act-1058ssd",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:16.245Z",
+      "type": "route"
+    },
+    {
+      "id": "act-qh4pg9f",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:14.530Z",
+      "type": "route"
+    },
+    {
+      "id": "act-809fcxb",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:14.467Z",
+      "type": "route"
+    },
+    {
+      "id": "act-m2fbr33",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:12.826Z",
+      "type": "route"
+    },
+    {
+      "id": "act-hou8t6b",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:12.801Z",
+      "type": "route"
+    },
+    {
+      "id": "act-cvg7k71",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:11.312Z",
+      "type": "route"
+    },
+    {
+      "id": "act-6xn2mvx",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:11.247Z",
+      "type": "route"
+    },
+    {
+      "id": "act-mmtitze",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:09.631Z",
+      "type": "route"
+    },
+    {
+      "id": "act-95isdoz",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:09.565Z",
+      "type": "route"
+    },
+    {
+      "id": "act-1vozei5",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:07.759Z",
+      "type": "route"
+    },
+    {
+      "id": "act-tm63dug",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:07.715Z",
+      "type": "route"
+    },
+    {
+      "id": "act-xhuft3t",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:05.975Z",
+      "type": "route"
+    },
+    {
+      "id": "act-2cw6fzb",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:05.963Z",
+      "type": "route"
+    },
+    {
+      "id": "act-t3579va",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:04.432Z",
+      "type": "route"
+    },
+    {
+      "id": "act-cl0il97",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:04.420Z",
+      "type": "route"
+    },
+    {
+      "id": "act-fgec0ib",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:02.858Z",
+      "type": "route"
+    },
+    {
+      "id": "act-g8wewpx",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:02.826Z",
+      "type": "route"
+    },
+    {
+      "id": "act-dtf7o1l",
+      "action": "Route analysis: Guwahati → Aizawl (474 km)",
+      "time": "2026-08-28T17:47:01.118Z",
+      "type": "route"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "notif-vi7eb6q",
+      "title": "CRITICAL DISRUPTION",
+      "message": "Landslide: Jorhat North Sector at Jorhat North Sector",
+      "time": "2026-08-28T21:52:28.868Z",
+      "read": false,
+      "type": "critical"
+    },
+    {
+      "id": "notif-6kzh8e4",
+      "title": "CRITICAL DISRUPTION",
+      "message": "Landslide: Sonapur Ghat Sector at Sonapur Ghat Sector",
+      "time": "2026-08-28T21:52:27.055Z",
+      "read": false,
+      "type": "critical"
+    },
+    {
+      "id": "notif-qg73dol",
+      "title": "CRITICAL DISRUPTION",
+      "message": "Landslide: Jorhat North Sector at Jorhat North Sector",
+      "time": "2026-08-28T21:33:39.218Z",
+      "read": false,
+      "type": "critical"
+    },
+    {
+      "id": "notif-mw79baq",
+      "title": "CRITICAL DISRUPTION",
+      "message": "Landslide: Sonapur Ghat Sector at Sonapur Ghat Sector",
+      "time": "2026-08-28T21:33:36.905Z",
+      "read": false,
+      "type": "critical"
+    },
+    {
+      "id": "notif-e6jwzgo",
+      "title": "CRITICAL DISRUPTION",
+      "message": "Landslide: Jorhat North Sector at Jorhat North Sector",
+      "time": "2026-08-28T21:22:16.190Z",
+      "read": false,
+      "type": "critical"
+    },
+    {
+      "id": "notif-8wsl7n6",
+      "title": "CRITICAL DISRUPTION",
+      "message": "Landslide: Sonapur Ghat Sector at Sonapur Ghat Sector",
+      "time": "2026-08-28T21:22:14.328Z",
+      "read": false,
+      "type": "critical"
+    },
+    {
+      "id": "notif-r5ucrvz",
+      "title": "CRITICAL DISRUPTION",
+      "message": "Landslide: Sonapur Ghat Sector at Sonapur Ghat Sector",
+      "time": "2026-08-28T21:22:04.807Z",
+      "read": false,
+      "type": "critical"
+    },
+    {
+      "id": "notif-wsw2wm2",
+      "title": "CRITICAL DISRUPTION",
+      "message": "Landslide: Sonapur Ghat Sector at Sonapur Ghat Sector",
+      "time": "2026-08-28T21:21:35.232Z",
+      "read": false,
+      "type": "critical"
+    },
+    {
+      "id": "notif-2ted1me",
+      "title": "CRITICAL DISRUPTION",
+      "message": "Landslide: Jorhat North Sector at Jorhat North Sector",
+      "time": "2026-08-28T20:51:55.848Z",
+      "read": false,
+      "type": "critical"
+    },
+    {
+      "id": "notif-60hvuod",
+      "title": "CRITICAL DISRUPTION",
+      "message": "Landslide: Jorhat North Sector at Jorhat North Sector",
+      "time": "2026-08-28T20:49:01.815Z",
+      "read": false,
+      "type": "critical"
+    },
+    {
+      "id": "notif-l56ggdh",
+      "title": "CRITICAL DISRUPTION",
+      "message": "Landslide: Jorhat North Sector at Jorhat North Sector",
+      "time": "2026-08-28T20:47:49.531Z",
+      "read": false,
+      "type": "critical"
+    },
+    {
+      "id": "notif-3vqatw0",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:20.070Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-26idrpi",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:19.546Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-41n2idm",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:17.910Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-vemu2az",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:17.895Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-9ni55y1",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:16.289Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-oel5epw",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:16.253Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-ew68mwx",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:14.533Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-oja2oas",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:14.469Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-cntt8h9",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:12.827Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-gtch6vi",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:12.802Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-qf09xkg",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:11.313Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-ym4ghf4",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:11.257Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-7hg4s4u",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:09.635Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-2083vom",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:09.573Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-rztzpq8",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:07.760Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-e6dw6vc",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:07.724Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-kcvy67a",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:05.998Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-1yo4pa3",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:05.964Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-41wfjyg",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:04.433Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-qlsr7l7",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:04.422Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-8ju5q4u",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:02.860Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-k9th1ui",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:02.828Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-ndopjms",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:01.120Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-vkd76zr",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:47:01.092Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-325r9sv",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:46:59.458Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-039vovb",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:46:59.446Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-h4tu065",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:46:57.900Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-fnt4kvw",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:46:57.889Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-r9p5jnp",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:46:56.333Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-oxs2smt",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:46:56.293Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-1zwu729",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:46:54.614Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-kyewlwt",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:46:54.560Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-5bwfano",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:46:52.721Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-xkzbubn",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:46:52.684Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-0br6xq6",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:46:50.998Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-22r157e",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:46:50.981Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-g3bjybt",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:46:49.102Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-869r2a4",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:46:48.977Z",
+      "read": false,
+      "type": "success"
+    },
+    {
+      "id": "notif-g8vb1nx",
+      "title": "Route Analyzed",
+      "message": "Optimal path for Guwahati → Aizawl computed (474 km, ETA: 5h 48m)",
+      "time": "2026-08-28T17:46:47.215Z",
+      "read": false,
+      "type": "success"
+    }
+  ],
+  "meta": {
+    "version": "2.4.0",
+    "lastUpdated": "2026-08-28T21:52:44.110Z",
+    "isEmergency": false
+  }
+}

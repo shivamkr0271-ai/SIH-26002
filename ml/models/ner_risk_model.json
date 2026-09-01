@@ -1,0 +1,77 @@
+{
+  "model_name": "NER Logistics Disruption Risk Ensemble",
+  "model_type": "RandomForest_MultiTarget_Regressor_Classifier",
+  "version": "1.4.0-prototype",
+  "training_dataset": "Synthetic NER Topographical & Meteorological Dataset (3,500 samples)",
+  "feature_names": [
+    "rainfall_mm",
+    "rainfall_intensity",
+    "elevation_meters",
+    "terrain_grade",
+    "historical_incidents",
+    "active_incidents",
+    "road_condition",
+    "bridge_condition",
+    "traffic_level",
+    "route_distance_km",
+    "route_duration_mins",
+    "incident_severity"
+  ],
+  "feature_importances": {
+    "rainfall_mm": 0.22,
+    "rainfall_intensity": 0.12,
+    "elevation_meters": 0.16,
+    "terrain_grade": 0.1,
+    "active_incidents": 0.14,
+    "incident_severity": 0.1,
+    "road_condition": 0.06,
+    "bridge_condition": 0.04,
+    "historical_incidents": 0.03,
+    "route_distance_km": 0.015,
+    "route_duration_mins": 0.01,
+    "traffic_level": 0.005
+  },
+  "normalization": {
+    "means": [
+      40.4646,
+      1.5861,
+      1096.2346,
+      1.3411,
+      6.0143,
+      0.7568,
+      6.2702,
+      7.0468,
+      1.0679,
+      339.8223,
+      628.3656,
+      0.8179
+    ],
+    "stds": [
+      39.535,
+      1.3986,
+      978.138,
+      1.0137,
+      3.7652,
+      1.0602,
+      1.8822,
+      1.7343,
+      0.969,
+      179.3823,
+      360.8076,
+      1.0568
+    ]
+  },
+  "metrics": {
+    "mae": 16.6,
+    "rmse": 19.63,
+    "r2_score": 0.1854,
+    "accuracy_percent": 40.6,
+    "evaluation_samples": 700
+  },
+  "thresholds": {
+    "low": 30.0,
+    "moderate": 55.0,
+    "high": 78.0
+  },
+  "created_at": "2026-08-28T18:00:00.000Z"
+}

@@ -29,6 +29,7 @@ export default function App() {
           <Route index element={<CommandCenter />} />
           <Route path="map" element={<MapPage />} />
           <Route path="route" element={<RouteIntelligence />} />
+          <Route path="route-intelligence" element={<RouteIntelligence />} />
           <Route path="fleet" element={<FleetTracking />} />
           <Route path="alerts" element={<Alerts />} />
           <Route path="supply" element={<SupplyChain />} />
